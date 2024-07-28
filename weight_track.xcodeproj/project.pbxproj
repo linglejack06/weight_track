@@ -15,6 +15,8 @@
 		5C6BB8232C4E97DF00C6C414 /* weight_trackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6BB8222C4E97DF00C6C414 /* weight_trackTests.swift */; };
 		5C6BB82D2C4E97DF00C6C414 /* weight_trackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6BB82C2C4E97DF00C6C414 /* weight_trackUITests.swift */; };
 		5C6BB82F2C4E97DF00C6C414 /* weight_trackUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6BB82E2C4E97DF00C6C414 /* weight_trackUITestsLaunchTests.swift */; };
+		5C76B4F52C56F00100F147E3 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76B4F42C56F00100F147E3 /* Exercise.swift */; };
+		5C76B4F72C56F19D00F147E3 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76B4F62C56F19D00F147E3 /* Workout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		5C6BB8282C4E97DF00C6C414 /* weight_trackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = weight_trackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C6BB82C2C4E97DF00C6C414 /* weight_trackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weight_trackUITests.swift; sourceTree = "<group>"; };
 		5C6BB82E2C4E97DF00C6C414 /* weight_trackUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weight_trackUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5C76B4F42C56F00100F147E3 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		5C76B4F62C56F19D00F147E3 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 				5C6BB8142C4E97DF00C6C414 /* Assets.xcassets */,
 				5C6BB8162C4E97DF00C6C414 /* weight_track.entitlements */,
 				5C6BB8172C4E97DF00C6C414 /* Preview Content */,
+				5C76B4F42C56F00100F147E3 /* Exercise.swift */,
+				5C76B4F62C56F19D00F147E3 /* Workout.swift */,
 			);
 			path = weight_track;
 			sourceTree = "<group>";
@@ -263,7 +269,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C6BB8112C4E97DE00C6C414 /* ContentView.swift in Sources */,
+				5C76B4F52C56F00100F147E3 /* Exercise.swift in Sources */,
 				5C6BB8132C4E97DE00C6C414 /* Item.swift in Sources */,
+				5C76B4F72C56F19D00F147E3 /* Workout.swift in Sources */,
 				5C6BB80F2C4E97DE00C6C414 /* weight_trackApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
