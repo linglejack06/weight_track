@@ -8,14 +8,18 @@
 import Foundation
 import SwiftData
 
-enum WorkoutCategory {
-    case push, pull, legs, upper, core
+enum WorkoutCategory: String, CaseIterable, Codable {
+    case push = "Push"
+    case pull = "Pull"
+    case legs = "Legs"
+    case upper = "Upper Body"
+    case core = "Core"
 }
 
 @Model
 class WorkoutTemplate {
     var title: String
-    @Relationship(deleteRule: .cascade) var exercises = [ExerciseTemplate]()
+    var exercises = [ExerciseTemplate]()
     var category: WorkoutCategory
     
     init(title: String = "", exercises: [ExerciseTemplate] = [], category: WorkoutCategory = .push) {

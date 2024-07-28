@@ -12,8 +12,10 @@ import SwiftData
 struct weight_trackApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Workout.self,
+            WorkoutTemplate.self,
             ActiveWorkout.self,
+            ExerciseTemplate.self,
+            ActiveExercise.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

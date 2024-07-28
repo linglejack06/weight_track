@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5C6BB80F2C4E97DE00C6C414 /* weight_trackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6BB80E2C4E97DE00C6C414 /* weight_trackApp.swift */; };
 		5C6BB8112C4E97DE00C6C414 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6BB8102C4E97DE00C6C414 /* ContentView.swift */; };
-		5C6BB8132C4E97DE00C6C414 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6BB8122C4E97DE00C6C414 /* Item.swift */; };
 		5C6BB8152C4E97DF00C6C414 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C6BB8142C4E97DF00C6C414 /* Assets.xcassets */; };
 		5C6BB8192C4E97DF00C6C414 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C6BB8182C4E97DF00C6C414 /* Preview Assets.xcassets */; };
 		5C6BB8232C4E97DF00C6C414 /* weight_trackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6BB8222C4E97DF00C6C414 /* weight_trackTests.swift */; };
@@ -40,7 +39,6 @@
 		5C6BB80B2C4E97DE00C6C414 /* weight_track.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weight_track.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C6BB80E2C4E97DE00C6C414 /* weight_trackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weight_trackApp.swift; sourceTree = "<group>"; };
 		5C6BB8102C4E97DE00C6C414 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		5C6BB8122C4E97DE00C6C414 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		5C6BB8142C4E97DF00C6C414 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C6BB8162C4E97DF00C6C414 /* weight_track.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = weight_track.entitlements; sourceTree = "<group>"; };
 		5C6BB8182C4E97DF00C6C414 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 			children = (
 				5C6BB80E2C4E97DE00C6C414 /* weight_trackApp.swift */,
 				5C6BB8102C4E97DE00C6C414 /* ContentView.swift */,
-				5C6BB8122C4E97DE00C6C414 /* Item.swift */,
 				5C6BB8142C4E97DF00C6C414 /* Assets.xcassets */,
 				5C6BB8162C4E97DF00C6C414 /* weight_track.entitlements */,
 				5C6BB8172C4E97DF00C6C414 /* Preview Content */,
@@ -270,7 +267,6 @@
 			files = (
 				5C6BB8112C4E97DE00C6C414 /* ContentView.swift in Sources */,
 				5C76B4F52C56F00100F147E3 /* Exercise.swift in Sources */,
-				5C6BB8132C4E97DE00C6C414 /* Item.swift in Sources */,
 				5C76B4F72C56F19D00F147E3 /* Workout.swift in Sources */,
 				5C6BB80F2C4E97DE00C6C414 /* weight_trackApp.swift in Sources */,
 			);
