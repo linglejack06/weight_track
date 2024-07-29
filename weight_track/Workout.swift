@@ -21,6 +21,9 @@ class WorkoutTemplate {
     var title: String
     var exercises = [ExerciseTemplate]()
     var category: WorkoutCategory
+    var numOfExercises: Int {
+        exercises.count
+    }
     
     init(title: String = "", exercises: [ExerciseTemplate] = [], category: WorkoutCategory = .push) {
         self.title = title

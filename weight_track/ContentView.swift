@@ -11,6 +11,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var workouts: [WorkoutTemplate]
+    @State private var isPresented = false
     
     func addSamples() {
         let push = WorkoutTemplate(title: "main chest", category: .push)
@@ -22,7 +23,18 @@ struct ContentView: View {
             TemplateListView()
                 .navigationTitle("Workout Templates")
                 .toolbar {
-                    Button("Add Samples", action: addSamples)
+                    Button("Add Workout", action: { isPresented = true })
+                }
+                .sheet(isPresented: $isPresented) {
+                    NavigationStack {
+                        AddTemplateView()
+                            .toolbar {
+                                ToolbarItem(placement: .topBarLeading) {
+                                    Button("Cancel", action: { isPresented.toggle() })
+                                }
+                            }
+                            .navigationTitle("New Workout Template")
+                    }
                 }
         }
     }

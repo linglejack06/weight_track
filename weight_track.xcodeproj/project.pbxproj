@@ -19,6 +19,7 @@
 		5CEE25202C5800ED00302F61 /* TemplateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE251F2C5800ED00302F61 /* TemplateListView.swift */; };
 		5CEE25222C5804CC00302F61 /* TemplateCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE25212C5804CC00302F61 /* TemplateCardView.swift */; };
 		5CEE25252C5804F400302F61 /* TemplateFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE25242C5804F400302F61 /* TemplateFullView.swift */; };
+		5CEE25272C583A1C00302F61 /* AddTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE25262C583A1C00302F61 /* AddTemplateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		5CEE251F2C5800ED00302F61 /* TemplateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateListView.swift; sourceTree = "<group>"; };
 		5CEE25212C5804CC00302F61 /* TemplateCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCardView.swift; sourceTree = "<group>"; };
 		5CEE25242C5804F400302F61 /* TemplateFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateFullView.swift; sourceTree = "<group>"; };
+		5CEE25262C583A1C00302F61 /* AddTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTemplateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				5C6BB8172C4E97DF00C6C414 /* Preview Content */,
 				5C76B4F42C56F00100F147E3 /* Exercise.swift */,
 				5C76B4F62C56F19D00F147E3 /* Workout.swift */,
+				5CEE25262C583A1C00302F61 /* AddTemplateView.swift */,
 			);
 			path = weight_track;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CEE25272C583A1C00302F61 /* AddTemplateView.swift in Sources */,
 				5C6BB8112C4E97DE00C6C414 /* ContentView.swift in Sources */,
 				5CEE25202C5800ED00302F61 /* TemplateListView.swift in Sources */,
 				5CEE25222C5804CC00302F61 /* TemplateCardView.swift in Sources */,
