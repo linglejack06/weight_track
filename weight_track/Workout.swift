@@ -19,7 +19,7 @@ enum WorkoutCategory: String, CaseIterable, Codable {
 @Model
 class WorkoutTemplate {
     var title: String
-    var exercises = [ExerciseTemplate]()
+    var exercises: [ExerciseTemplate]
     var category: WorkoutCategory
     var numOfExercises: Int {
         exercises.count

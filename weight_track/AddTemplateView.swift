@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddTemplateView: View {
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) private var modelContext
+    @Query private var workouts: [WorkoutTemplate]
     @State private var title = ""
     @State private var category: WorkoutCategory = .push
     @State private var exerciseName = ""
@@ -15,9 +19,10 @@ struct AddTemplateView: View {
     @State private var exercises: [ExerciseTemplate] = []
     
     func addExercise () {
-        let exercise = ExerciseTemplate(numOfSets: numOfSets, name: exerciseName)
+        let exerciseToAdd = ExerciseTemplate(numOfSets: numOfSets, name: exerciseName)
+
         withAnimation {
-            exercises.append(exercise)
+            exercises.append(exerciseToAdd)
         }
         exerciseName = ""
         numOfSets = 0
@@ -28,8 +33,15 @@ struct AddTemplateView: View {
     }
     
     func addWorkout () {
-        
+        let workoutToAdd = WorkoutTemplate(title: title, exercises: exercises, category: category)
+        if workouts.contains(workoutToAdd) {
+//          display error that this workout already exists
+        } else {
+            modelContext.insert(workoutToAdd)
+            dismiss()
+        }
     }
+    
     
     var body: some View {
         Form {

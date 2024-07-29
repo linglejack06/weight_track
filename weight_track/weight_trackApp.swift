@@ -17,10 +17,10 @@ struct weight_trackApp: App {
             ExerciseTemplate.self,
             ActiveExercise.self,
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        let modelConfiguration = ModelConfiguration(for: WorkoutTemplate.self, ActiveWorkout.self, ExerciseTemplate.self, ActiveExercise.self)
 
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            return try ModelContainer(for: WorkoutTemplate.self, ActiveWorkout.self, ExerciseTemplate.self, ActiveExercise.self, configurations: modelConfiguration)
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
