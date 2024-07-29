@@ -16,6 +16,9 @@
 		5C6BB82F2C4E97DF00C6C414 /* weight_trackUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6BB82E2C4E97DF00C6C414 /* weight_trackUITestsLaunchTests.swift */; };
 		5C76B4F52C56F00100F147E3 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76B4F42C56F00100F147E3 /* Exercise.swift */; };
 		5C76B4F72C56F19D00F147E3 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76B4F62C56F19D00F147E3 /* Workout.swift */; };
+		5CEE25202C5800ED00302F61 /* TemplateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE251F2C5800ED00302F61 /* TemplateListView.swift */; };
+		5CEE25222C5804CC00302F61 /* TemplateCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE25212C5804CC00302F61 /* TemplateCardView.swift */; };
+		5CEE25252C5804F400302F61 /* TemplateFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE25242C5804F400302F61 /* TemplateFullView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		5C6BB82E2C4E97DF00C6C414 /* weight_trackUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weight_trackUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5C76B4F42C56F00100F147E3 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		5C76B4F62C56F19D00F147E3 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		5CEE251F2C5800ED00302F61 /* TemplateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateListView.swift; sourceTree = "<group>"; };
+		5CEE25212C5804CC00302F61 /* TemplateCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCardView.swift; sourceTree = "<group>"; };
+		5CEE25242C5804F400302F61 /* TemplateFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateFullView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 		5C6BB80D2C4E97DE00C6C414 /* weight_track */ = {
 			isa = PBXGroup;
 			children = (
+				5CEE25232C5804D700302F61 /* TemplateViews */,
 				5C6BB80E2C4E97DE00C6C414 /* weight_trackApp.swift */,
 				5C6BB8102C4E97DE00C6C414 /* ContentView.swift */,
 				5C6BB8142C4E97DF00C6C414 /* Assets.xcassets */,
@@ -133,6 +140,16 @@
 				5C6BB82E2C4E97DF00C6C414 /* weight_trackUITestsLaunchTests.swift */,
 			);
 			path = weight_trackUITests;
+			sourceTree = "<group>";
+		};
+		5CEE25232C5804D700302F61 /* TemplateViews */ = {
+			isa = PBXGroup;
+			children = (
+				5CEE25212C5804CC00302F61 /* TemplateCardView.swift */,
+				5CEE251F2C5800ED00302F61 /* TemplateListView.swift */,
+				5CEE25242C5804F400302F61 /* TemplateFullView.swift */,
+			);
+			path = TemplateViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,7 +283,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C6BB8112C4E97DE00C6C414 /* ContentView.swift in Sources */,
+				5CEE25202C5800ED00302F61 /* TemplateListView.swift in Sources */,
+				5CEE25222C5804CC00302F61 /* TemplateCardView.swift in Sources */,
 				5C76B4F52C56F00100F147E3 /* Exercise.swift in Sources */,
+				5CEE25252C5804F400302F61 /* TemplateFullView.swift in Sources */,
 				5C76B4F72C56F19D00F147E3 /* Workout.swift in Sources */,
 				5C6BB80F2C4E97DE00C6C414 /* weight_trackApp.swift in Sources */,
 			);

@@ -19,18 +19,11 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(workouts) { workout in
-                    HStack {
-                        Text(workout.title)
-                        Text(workout.category.rawValue)
-                    }
+            TemplateListView()
+                .navigationTitle("Workout Templates")
+                .toolbar {
+                    Button("Add Samples", action: addSamples)
                 }
-            }
-            .navigationTitle("Workout Templates")
-            .toolbar {
-                Button("Add Samples", action: addSamples)
-            }
         }
     }
 }
