@@ -45,9 +45,11 @@ struct AddTemplateView: View {
         } else {
             // don't create duplicate templates of exercises
             var completeExercises = [ExerciseTemplate]()
+            var alreadyExercises = [ExerciseTemplate]()
             for exercise in exercises {
-                if let existingExercise = existingExercises.first(where: { $0 == exercise }) {
-                    completeExercises.append(existingExercise)
+                if let existingExercise = existingExercises.first(where: { $0.name == exercise.name && $0.numOfSets == exercise.numOfSets }) {
+                    print(existingExercise)
+                    alreadyExercises.append(existingExercise)
                 } else {
                     completeExercises.append(exercise)
                 }
@@ -55,6 +57,12 @@ struct AddTemplateView: View {
             
             let workoutToAdd = WorkoutTemplate(title: title, exercises: completeExercises, category: category)
             modelContext.insert(workoutToAdd)
+            
+            // append without inserting ( will create new versions of exercises )
+            for ex in alreadyExercises {
+                workoutToAdd.exercises.append(ex)
+            }
+            
             dismiss()
         }
     }

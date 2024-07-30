@@ -17,28 +17,20 @@ struct ContentView: View {
         let push = WorkoutTemplate(title: "main chest", category: .push)
         modelContext.insert(push)
     }
-
+    
     var body: some View {
-        NavigationStack {
+        TabView {
             TemplateListView()
-                .navigationTitle("Workout Templates")
-                .toolbar {
-                    Button("Add Workout", action: { isPresented = true })
+                .tabItem {
+                    Label("Home", systemImage: "house")
                 }
-                .sheet(isPresented: $isPresented) {
-                    NavigationStack {
-                        AddTemplateView()
-                            .toolbar {
-                                ToolbarItem(placement: .topBarLeading) {
-                                    Button("Cancel", action: { isPresented.toggle() })
-                                }
-                            }
-                            .navigationTitle("New Workout Template")
-                    }
+            Text("home")
+                .tabItem {
+                    Label("History", systemImage: "clock")
                 }
+            }
         }
     }
-}
 
 #Preview {
     ContentView()

@@ -11,6 +11,7 @@ import SwiftData
 struct TemplateListView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var workouts: [WorkoutTemplate]
+    @State private var isPresented = false
     
     func deleteTemplate(_ indexSet: IndexSet) {
         for index in indexSet {
@@ -23,6 +24,18 @@ struct TemplateListView: View {
                 Text(workout.title)
             }
             .onDelete(perform: deleteTemplate)
+        }
+        .navigationTitle("Workout Templates")
+        .sheet(isPresented: $isPresented) {
+            NavigationStack {
+                AddTemplateView()
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button("Cancel", action: { isPresented.toggle() })
+                        }
+                    }
+                    .navigationTitle("New Workout Template")
+            }
         }
     }
 }
