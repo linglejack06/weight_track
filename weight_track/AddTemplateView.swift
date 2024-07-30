@@ -15,27 +15,33 @@ struct AddTemplateView: View {
     @State private var title = ""
     @State private var category: WorkoutCategory = .push
     @State private var exerciseName = ""
-    @State private var numOfSets = 0
+    @State private var numOfSets: Int? = nil
     @State private var exercises: [ExerciseTemplate] = []
+    @State private var hasError = false
     
     func addExercise () {
-        let exerciseToAdd = ExerciseTemplate(numOfSets: numOfSets, name: exerciseName)
+        let exerciseToAdd = ExerciseTemplate(numOfSets: numOfSets!, name: exerciseName)
 
         withAnimation {
             exercises.append(exerciseToAdd)
         }
         exerciseName = ""
-        numOfSets = 0
+        numOfSets = nil
     }
     
     func deleteExercise (_ indexSet: IndexSet) {
         exercises.remove(atOffsets: indexSet)
     }
     
+    func moveExercise(from source: IndexSet, to destination: Int) {
+        exercises.move(fromOffsets: source, toOffset: destination)
+    }
+    
     func addWorkout () {
         let workoutToAdd = WorkoutTemplate(title: title, exercises: exercises, category: category)
-        if workouts.contains(workoutToAdd) {
+        if workouts.contains(where: { $0.title == title }) {
 //          display error that this workout already exists
+            hasError = true
         } else {
             modelContext.insert(workoutToAdd)
             dismiss()
@@ -51,26 +57,48 @@ struct AddTemplateView: View {
                     Text("\(cat.rawValue)")
                 }
             }
-            Section("Exercises") {
+            Section {
                 List {
-                    ForEach(exercises) { exercise in
-                        Text(exercise.name)
+                    ForEach($exercises) { $exercise in
+                        HStack {
+                            Text("\(exercise.numOfSets)")
+                            Text(exercise.name)
+                        }
                     }
                     .onDelete(perform: deleteExercise)
+                    .onMove(perform: moveExercise)
                 }
                 HStack {
                     TextField("Name", text: $exerciseName)
                     TextField("Sets", value: $numOfSets, format: .number)
+                        .keyboardType(.numberPad)
                     Button(action: addExercise) {
                         Image(systemName: "plus")
                     }
+                    .disabled(exerciseName == "" || numOfSets == nil || numOfSets == 0)
+                }
+            } header: {
+                HStack {
+                    Text("Exercises")
+                        .font(.subheadline)
+                    Spacer()
+                    EditButton()
+                        .font(.subheadline)
+                        .disabled(exercises.count == 0)
+                    
                 }
             }
+        }
+        .alert("Error", isPresented: $hasError) {
+            Button("OK") {}
+        } message: {
+            Text("Workout titled \(title) already exists.")
         }
         .toolbar {
             Button(action: addWorkout) {
                 Image(systemName: "plus")
             }
+            .disabled(exercises.count == 0 || title == "")
         }
     }
 }
