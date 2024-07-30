@@ -12,6 +12,7 @@ struct AddTemplateView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var modelContext
     @Query private var workouts: [WorkoutTemplate]
+    @Query private var existingExercises: [ExerciseTemplate]
     @State private var title = ""
     @State private var category: WorkoutCategory = .push
     @State private var exerciseName = ""
@@ -38,11 +39,21 @@ struct AddTemplateView: View {
     }
     
     func addWorkout () {
-        let workoutToAdd = WorkoutTemplate(title: title, exercises: exercises, category: category)
         if workouts.contains(where: { $0.title == title }) {
 //          display error that this workout already exists
             hasError = true
         } else {
+            // don't create duplicate templates of exercises
+            var completeExercises = [ExerciseTemplate]()
+            for exercise in exercises {
+                if let existingExercise = existingExercises.first(where: { $0 == exercise }) {
+                    completeExercises.append(existingExercise)
+                } else {
+                    completeExercises.append(exercise)
+                }
+            }
+            
+            let workoutToAdd = WorkoutTemplate(title: title, exercises: completeExercises, category: category)
             modelContext.insert(workoutToAdd)
             dismiss()
         }

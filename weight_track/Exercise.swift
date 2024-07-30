@@ -12,12 +12,12 @@ import SwiftData
 class ExerciseTemplate {
     var numOfSets: Int
     var name: String
-    var workout: WorkoutTemplate?
+    @Relationship(inverse: \WorkoutTemplate.exercises) var workoutTemplates: [WorkoutTemplate]
     
-    init(numOfSets: Int = 0, name: String = "", workout: WorkoutTemplate? = nil) {
+    init(numOfSets: Int = 0, name: String = "", workoutTemplates: [WorkoutTemplate] = []) {
         self.numOfSets = numOfSets
         self.name = name
-        self.workout = workout
+        self.workoutTemplates = workoutTemplates
     }
 }
 
