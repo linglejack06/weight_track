@@ -77,7 +77,7 @@ struct AddTemplateView: View {
         }
         .toolbar {
             Button(action: addWorkout) {
-                Image(systemName: "plus")
+                Text("Add workout")
             }
             .disabled(exercises.count == 0 || title == "")
         }
