@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct TemplateFullView: View {
+    let template: WorkoutTemplate
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    TemplateFullView()
+    TemplateFullView(template: sampleWorkoutTemplate)
 }

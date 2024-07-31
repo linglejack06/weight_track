@@ -18,11 +18,25 @@ struct TemplateListView: View {
             modelContext.delete(workouts[index])
         }
     }
+    
+    init(sortedCategory: WorkoutCategory? = nil) {
+        var filter: Predicate<WorkoutTemplate>
+        if (sortedCategory != nil) {
+            filter = #Predicate<WorkoutTemplate> { workout in
+                return workout.category == sortedCategory!
+            }
+        } else {
+            filter = #Predicate<WorkoutTemplate> { workout in
+                return true
+            }
+        }
+        _workouts = Query(filter: filter)
+    }
     var body: some View {
         NavigationStack {
             List {
                 ForEach(workouts) { workout in
-                    Text(workout.title)
+                    TemplateCardView(template: workout)
                 }
                 .onDelete(perform: deleteTemplate)
             }

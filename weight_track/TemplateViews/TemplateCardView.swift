@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct TemplateCardView: View {
+    let template: WorkoutTemplate
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationLink {
+            TemplateFullView(template: template)
+        } label: {
+            HStack {
+                Text(template.title)
+                Text("\(template.category.rawValue) Workout")
+                Text("\(template.exercises.count) Exercises")
+            }
+        }
     }
-}
-
-#Preview {
-    TemplateCardView()
 }

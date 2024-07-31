@@ -21,9 +21,6 @@ class WorkoutTemplate {
     var title: String
     var exercises: [ExerciseTemplate]
     var category: WorkoutCategory
-    var numOfExercises: Int {
-        exercises.count
-    }
     
     init(title: String = "", exercises: [ExerciseTemplate] = [], category: WorkoutCategory = .push) {
         self.title = title
@@ -44,3 +41,5 @@ class ActiveWorkout {
         self.exercises = template.exercises.map { ActiveExercise(template: $0) }
     }
 }
+
+let sampleWorkoutTemplate = WorkoutTemplate(title: "Full Upper", exercises: [ExerciseTemplate(numOfSets: 8, name: "chest press", workoutTemplates: [])],category: .upper )
