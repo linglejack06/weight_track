@@ -19,22 +19,29 @@ struct TemplateListView: View {
         }
     }
     var body: some View {
-        List {
-            ForEach(workouts) { workout in
-                Text(workout.title)
+        NavigationStack {
+            List {
+                ForEach(workouts) { workout in
+                    Text(workout.title)
+                }
+                .onDelete(perform: deleteTemplate)
             }
-            .onDelete(perform: deleteTemplate)
-        }
-        .navigationTitle("Workout Templates")
-        .sheet(isPresented: $isPresented) {
-            NavigationStack {
-                AddTemplateView()
-                    .toolbar {
-                        ToolbarItem(placement: .topBarLeading) {
-                            Button("Cancel", action: { isPresented.toggle() })
+            .navigationTitle("Workout Templates")
+            .toolbar {
+                ToolbarItem {
+                    Button("Add Workout", action: {isPresented = true})
+                }
+            }
+            .sheet(isPresented: $isPresented) {
+                NavigationStack {
+                    AddTemplateView()
+                        .toolbar {
+                            ToolbarItem(placement: .topBarLeading) {
+                                Button("Cancel", action: { isPresented.toggle() })
+                            }
                         }
-                    }
-                    .navigationTitle("New Workout Template")
+                        .navigationTitle("New Workout Template")
+                }
             }
         }
     }
