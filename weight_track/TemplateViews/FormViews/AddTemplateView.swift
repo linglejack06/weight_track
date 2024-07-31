@@ -20,16 +20,7 @@ struct AddTemplateView: View {
     @State private var exercises: [ExerciseTemplate] = []
     @State private var hasError = false
     @State private var exerciseSuggestions = [ExerciseTemplate]()
-    
-    func addExercise () {
-        let exerciseToAdd = ExerciseTemplate(numOfSets: numOfSets!, name: exerciseName)
-
-        withAnimation {
-            exercises.append(exerciseToAdd)
-        }
-        exerciseName = ""
-        numOfSets = nil
-    }
+    @State private var presentPopover = false
     
     func deleteExercise (_ indexSet: IndexSet) {
         exercises.remove(atOffsets: indexSet)
@@ -37,24 +28,6 @@ struct AddTemplateView: View {
     
     func moveExercise(from source: IndexSet, to destination: Int) {
         exercises.move(fromOffsets: source, toOffset: destination)
-    }
-    
-    // finds similar exercises by name and limits to 5
-    func findExerciseSuggestions(for name: String) {
-        if (name == "") {
-            exerciseSuggestions = []
-        }
-        exerciseSuggestions = Array(
-            existingExercises.filter({ 
-                $0.name.localizedCaseInsensitiveContains(name)
-            })
-            .prefix(5)
-        )
-    }
-    
-    func useSuggestion(_ exercise: ExerciseTemplate) {
-        exerciseName = exercise.name
-        numOfSets = exercise.numOfSets
     }
     
     func addWorkout () {
@@ -106,24 +79,7 @@ struct AddTemplateView: View {
                     .onDelete(perform: deleteExercise)
                     .onMove(perform: moveExercise)
                 }
-                HStack {
-                    TextField("Name", text: $exerciseName)
-                        .onChange(of: exerciseName){ oldValue, newValue in
-                            findExerciseSuggestions(for: newValue)
-                        }
-                    TextField("Sets", value: $numOfSets, format: .number)
-                        .keyboardType(.numberPad)
-                    Button(action: addExercise) {
-                        Image(systemName: "plus")
-                    }
-                    .disabled(exerciseName == "" || numOfSets == nil || numOfSets == 0)
-                }
-                List(exerciseSuggestions) { exercise in
-                    Text(exercise.name)
-                        .onTapGesture {
-                            useSuggestion(exercise)
-                        }
-                }
+                AddExerciseTemplateView(exercises: $exercises)
             } header: {
                 HStack {
                     Text("Exercises")

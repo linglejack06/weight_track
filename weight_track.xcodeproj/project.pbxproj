@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C24E7992C5AAA6E009B8437 /* AddExerciseTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24E7982C5AAA6E009B8437 /* AddExerciseTemplateView.swift */; };
 		5C6BB80F2C4E97DE00C6C414 /* weight_trackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6BB80E2C4E97DE00C6C414 /* weight_trackApp.swift */; };
 		5C6BB8112C4E97DE00C6C414 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6BB8102C4E97DE00C6C414 /* ContentView.swift */; };
 		5C6BB8152C4E97DF00C6C414 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C6BB8142C4E97DF00C6C414 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C24E7982C5AAA6E009B8437 /* AddExerciseTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseTemplateView.swift; sourceTree = "<group>"; };
 		5C6BB80B2C4E97DE00C6C414 /* weight_track.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weight_track.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C6BB80E2C4E97DE00C6C414 /* weight_trackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weight_trackApp.swift; sourceTree = "<group>"; };
 		5C6BB8102C4E97DE00C6C414 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,6 +86,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C24E7972C5AAA59009B8437 /* FormViews */ = {
+			isa = PBXGroup;
+			children = (
+				5CEE25262C583A1C00302F61 /* AddTemplateView.swift */,
+				5C24E7982C5AAA6E009B8437 /* AddExerciseTemplateView.swift */,
+			);
+			path = FormViews;
+			sourceTree = "<group>";
+		};
 		5C6BB8022C4E97DE00C6C414 = {
 			isa = PBXGroup;
 			children = (
@@ -115,7 +126,6 @@
 				5C6BB8172C4E97DF00C6C414 /* Preview Content */,
 				5C76B4F42C56F00100F147E3 /* Exercise.swift */,
 				5C76B4F62C56F19D00F147E3 /* Workout.swift */,
-				5CEE25262C583A1C00302F61 /* AddTemplateView.swift */,
 			);
 			path = weight_track;
 			sourceTree = "<group>";
@@ -148,6 +158,7 @@
 		5CEE25232C5804D700302F61 /* TemplateViews */ = {
 			isa = PBXGroup;
 			children = (
+				5C24E7972C5AAA59009B8437 /* FormViews */,
 				5CEE25212C5804CC00302F61 /* TemplateCardView.swift */,
 				5CEE251F2C5800ED00302F61 /* TemplateListView.swift */,
 				5CEE25242C5804F400302F61 /* TemplateFullView.swift */,
@@ -292,6 +303,7 @@
 				5C76B4F52C56F00100F147E3 /* Exercise.swift in Sources */,
 				5CEE25252C5804F400302F61 /* TemplateFullView.swift in Sources */,
 				5C76B4F72C56F19D00F147E3 /* Workout.swift in Sources */,
+				5C24E7992C5AAA6E009B8437 /* AddExerciseTemplateView.swift in Sources */,
 				5C6BB80F2C4E97DE00C6C414 /* weight_trackApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
