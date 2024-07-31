@@ -15,20 +15,8 @@ struct AddTemplateView: View {
     @Query private var existingExercises: [ExerciseTemplate]
     @State private var title = ""
     @State private var category: WorkoutCategory = .push
-    @State private var exerciseName = ""
-    @State private var numOfSets: Int? = nil
     @State private var exercises: [ExerciseTemplate] = []
     @State private var hasError = false
-    @State private var exerciseSuggestions = [ExerciseTemplate]()
-    @State private var presentPopover = false
-    
-    func deleteExercise (_ indexSet: IndexSet) {
-        exercises.remove(atOffsets: indexSet)
-    }
-    
-    func moveExercise(from source: IndexSet, to destination: Int) {
-        exercises.move(fromOffsets: source, toOffset: destination)
-    }
     
     func addWorkout () {
         if workouts.contains(where: { $0.title == title }) {
@@ -69,16 +57,6 @@ struct AddTemplateView: View {
                 }
             }
             Section {
-                List {
-                    ForEach($exercises) { $exercise in
-                        HStack {
-                            Text("\(exercise.numOfSets)")
-                            Text(exercise.name)
-                        }
-                    }
-                    .onDelete(perform: deleteExercise)
-                    .onMove(perform: moveExercise)
-                }
                 AddExerciseTemplateView(exercises: $exercises)
             } header: {
                 HStack {

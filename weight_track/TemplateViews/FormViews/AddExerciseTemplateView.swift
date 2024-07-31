@@ -27,6 +27,14 @@ struct AddExerciseTemplateView: View {
         numOfSets = nil
     }
     
+    func deleteExercise (_ indexSet: IndexSet) {
+        exercises.remove(atOffsets: indexSet)
+    }
+    
+    func moveExercise(from source: IndexSet, to destination: Int) {
+        exercises.move(fromOffsets: source, toOffset: destination)
+    }
+    
     // finds similar exercises by name and limits to 5
     func findExerciseSuggestions(for name: String) {
         if (name == "") {
@@ -50,6 +58,16 @@ struct AddExerciseTemplateView: View {
         numOfSets = exercise.numOfSets
     }
     var body: some View {
+        List {
+            ForEach($exercises) { $exercise in
+                HStack {
+                    Text("\(exercise.numOfSets)")
+                    Text(exercise.name)
+                }
+            }
+            .onDelete(perform: deleteExercise)
+            .onMove(perform: moveExercise)
+        }
         HStack {
             TextField("Name", text: $exerciseName)
                 .containerRelativeFrame(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/, count: 2, span: 1, spacing: 0)
