@@ -20,7 +20,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            TemplateListView()
+            HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }

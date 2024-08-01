@@ -16,16 +16,25 @@ enum WorkoutCategory: String, CaseIterable, Codable {
     case core = "Core"
 }
 
+enum WorkoutCategoryWithAll: String, CaseIterable, Codable {
+    case push = "Push"
+    case pull = "Pull"
+    case legs = "Legs"
+    case upper = "Upper Body"
+    case core = "Core"
+    case all = "All"
+}
+
 @Model
 class WorkoutTemplate {
     var title: String
     var exercises: [ExerciseTemplate]
-    var category: WorkoutCategory
+    var category: String = WorkoutCategory.push.rawValue
     
     init(title: String = "", exercises: [ExerciseTemplate] = [], category: WorkoutCategory = .push) {
         self.title = title
         self.exercises = exercises
-        self.category = category
+        self.category = category.rawValue
     }
 }
 

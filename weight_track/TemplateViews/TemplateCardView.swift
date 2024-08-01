@@ -15,7 +15,7 @@ struct TemplateCardView: View {
         } label: {
             HStack {
                 Text(template.title)
-                Text("\(template.category.rawValue) Workout")
+                Text("\(template.category) Workout")
                 Text("\(template.exercises.count) Exercises")
             }
         }

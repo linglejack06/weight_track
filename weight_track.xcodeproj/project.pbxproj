@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C1DBE342C5C33F700B28D02 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1DBE332C5C33F700B28D02 /* HomeView.swift */; };
 		5C24E7992C5AAA6E009B8437 /* AddExerciseTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24E7982C5AAA6E009B8437 /* AddExerciseTemplateView.swift */; };
 		5C6BB80F2C4E97DE00C6C414 /* weight_trackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6BB80E2C4E97DE00C6C414 /* weight_trackApp.swift */; };
 		5C6BB8112C4E97DE00C6C414 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6BB8102C4E97DE00C6C414 /* ContentView.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C1DBE332C5C33F700B28D02 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5C24E7982C5AAA6E009B8437 /* AddExerciseTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseTemplateView.swift; sourceTree = "<group>"; };
 		5C6BB80B2C4E97DE00C6C414 /* weight_track.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weight_track.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C6BB80E2C4E97DE00C6C414 /* weight_trackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weight_trackApp.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				5C6BB8172C4E97DF00C6C414 /* Preview Content */,
 				5C76B4F42C56F00100F147E3 /* Exercise.swift */,
 				5C76B4F62C56F19D00F147E3 /* Workout.swift */,
+				5C1DBE332C5C33F700B28D02 /* HomeView.swift */,
 			);
 			path = weight_track;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				5CEE25272C583A1C00302F61 /* AddTemplateView.swift in Sources */,
 				5C6BB8112C4E97DE00C6C414 /* ContentView.swift in Sources */,
 				5CEE25202C5800ED00302F61 /* TemplateListView.swift in Sources */,
+				5C1DBE342C5C33F700B28D02 /* HomeView.swift in Sources */,
 				5CEE25222C5804CC00302F61 /* TemplateCardView.swift in Sources */,
 				5C76B4F52C56F00100F147E3 /* Exercise.swift in Sources */,
 				5CEE25252C5804F400302F61 /* TemplateFullView.swift in Sources */,

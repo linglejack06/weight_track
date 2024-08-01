@@ -11,7 +11,6 @@ import SwiftData
 struct TemplateListView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var workouts: [WorkoutTemplate]
-    @State private var isPresented = false
     
     func deleteTemplate(_ indexSet: IndexSet) {
         for index in indexSet {
@@ -19,16 +18,15 @@ struct TemplateListView: View {
         }
     }
     
-    init(sortedCategory: WorkoutCategory? = nil) {
+    init(sortedCategory: WorkoutCategoryWithAll = .all) {
         var filter: Predicate<WorkoutTemplate>
-        if (sortedCategory != nil) {
-            filter = #Predicate<WorkoutTemplate> { workout in
-                return workout.category == sortedCategory!
+        if (sortedCategory != .all) {
+            let categoryToCompare = sortedCategory.rawValue
+            filter = #Predicate<WorkoutTemplate> {
+                $0.category == categoryToCompare
             }
         } else {
-            filter = #Predicate<WorkoutTemplate> { workout in
-                return true
-            }
+            filter = #Predicate<WorkoutTemplate> { _ in return true }
         }
         _workouts = Query(filter: filter)
     }
@@ -39,23 +37,6 @@ struct TemplateListView: View {
                     TemplateCardView(template: workout)
                 }
                 .onDelete(perform: deleteTemplate)
-            }
-            .navigationTitle("Workout Templates")
-            .toolbar {
-                ToolbarItem {
-                    Button("Add Workout", action: {isPresented = true})
-                }
-            }
-            .sheet(isPresented: $isPresented) {
-                NavigationStack {
-                    AddTemplateView()
-                        .toolbar {
-                            ToolbarItem(placement: .topBarLeading) {
-                                Button("Cancel", action: { isPresented.toggle() })
-                            }
-                        }
-                        .navigationTitle("New Workout Template")
-                }
             }
         }
     }
