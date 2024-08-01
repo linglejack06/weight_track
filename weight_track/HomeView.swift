@@ -14,17 +14,26 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Picker("Sort By", selection: $sortedCategory) {
-                    ForEach(WorkoutCategoryWithAll.allCases, id: \.self) { category in
-                        Text("\(category.rawValue)")
+                List {
+                    Section {
+                        HStack (alignment: .center, spacing: 0) {
+                            Picker("Category", selection: $sortedCategory) {
+                                ForEach(WorkoutCategoryWithAll.allCases, id: \.self) { category in
+                                    Text("\(category.rawValue)")
+                                }
+                            }
+                        }
+                    }
+                    Section("Workouts") {
+                        TemplateListView(sortedCategory: sortedCategory)
                     }
                 }
-                TemplateListView(sortedCategory: sortedCategory)
             }
             .navigationTitle("Workout Templates")
             .toolbar {
                 ToolbarItem {
                     Button("Add Workout", action: {isPresented = true})
+                        .font(.title2)
                 }
             }
             .sheet(isPresented: $isPresented) {
@@ -44,4 +53,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .modelContainer(for: WorkoutTemplate.self)
 }

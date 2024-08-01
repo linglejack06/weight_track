@@ -31,13 +31,13 @@ struct TemplateListView: View {
         _workouts = Query(filter: filter)
     }
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(workouts) { workout in
-                    TemplateCardView(template: workout)
-                }
-                .onDelete(perform: deleteTemplate)
+        if (workouts.count > 0) {
+            ForEach(workouts) { workout in
+                TemplateCardView(template: workout)
             }
+            .onDelete(perform: deleteTemplate)
+        } else {
+            Text("Oops! No workouts match this category.")
         }
     }
 }
