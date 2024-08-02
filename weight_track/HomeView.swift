@@ -29,8 +29,11 @@ struct HomeView: View {
                     }
                 }
             }
-            .navigationTitle("Workout Templates")
             .toolbar {
+                ToolbarItem(placement: .topBarLeading){
+                    Text("Workout Templates")
+                        .font(.title2)
+                }
                 ToolbarItem {
                     Button("Add Workout", action: {isPresented = true})
                         .font(.title2)

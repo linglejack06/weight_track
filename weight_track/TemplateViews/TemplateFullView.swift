@@ -20,21 +20,36 @@ struct TemplateFullView: View {
     var body: some View {
         List {
             Section {
-                Text("Category: \(template.category)")
-                    .font(.subheadline)
-                Text("\(template.exercises.count) Exercises")
-                    .font(.subheadline)
-                Text("\(setCount) Total Sets")
-                    .font(.subheadline)
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("\(template.exercises.count) Exercises")
+                            .font(.headline)
+                        Text("\(setCount) Total Sets")
+                            .font(.headline)
+                    }
+                    Spacer()
+                    VStack (alignment: .leading) {
+                        Text("Completed Workouts")
+                        Text("Most Recent Completion")
+                    }
+                }
             }
+            .listRowSeparator(.hidden)
             Section("Exercises") {
                 List(template.exercises) { exercise in
                     ExerciseRowView(exercise: exercise)
                 }
             }
         }
-        .navigationTitle(template.title)
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                VStack {
+                    Text(template.title)
+                    Text("Category: \(template.category)")
+                        .font(.subheadline)
+                        .foregroundStyle(Color.secondary)
+                }
+            }
             ToolbarItem {
                 Button("Start Workout") {}
             }
