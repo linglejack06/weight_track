@@ -51,4 +51,5 @@ class ActiveWorkout {
     }
 }
 
-let sampleWorkoutTemplate = WorkoutTemplate(title: "Full Upper", exercises: [ExerciseTemplate(numOfSets: 8, name: "chest press", workoutTemplates: [])],category: .upper )
+let sampleExerciseTemplate = ExerciseTemplate(numOfSets: 8, name: "chest press", workoutTemplates: [])
+let sampleWorkoutTemplate = WorkoutTemplate(title: "Full Upper", exercises: [sampleExerciseTemplate],category: .upper )

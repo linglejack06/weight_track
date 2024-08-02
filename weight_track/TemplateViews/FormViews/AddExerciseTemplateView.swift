@@ -60,10 +60,7 @@ struct AddExerciseTemplateView: View {
     var body: some View {
         List {
             ForEach($exercises) { $exercise in
-                HStack {
-                    Text("\(exercise.numOfSets)")
-                    Text(exercise.name)
-                }
+                ExerciseRowView(exercise: exercise)
             }
             .onDelete(perform: deleteExercise)
             .onMove(perform: moveExercise)

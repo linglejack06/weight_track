@@ -9,8 +9,36 @@ import SwiftUI
 
 struct TemplateFullView: View {
     let template: WorkoutTemplate
+    var setCount: Int {
+        var count = 0
+        for exercise in template.exercises {
+            count += exercise.numOfSets
+        }
+        return count
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            Section {
+                Text("Category: \(template.category)")
+                    .font(.subheadline)
+                Text("\(template.exercises.count) Exercises")
+                    .font(.subheadline)
+                Text("\(setCount) Total Sets")
+                    .font(.subheadline)
+            }
+            Section("Exercises") {
+                List(template.exercises) { exercise in
+                    ExerciseRowView(exercise: exercise)
+                }
+            }
+        }
+        .navigationTitle(template.title)
+        .toolbar {
+            ToolbarItem {
+                Button("Start Workout") {}
+            }
+        }
     }
 }
 

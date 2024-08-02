@@ -9,14 +9,25 @@ import SwiftUI
 
 struct TemplateCardView: View {
     let template: WorkoutTemplate
+    var setCount: Int {
+        var count = 0
+        for exercise in template.exercises {
+            count += exercise.numOfSets
+        }
+        return count
+    }
     var body: some View {
         NavigationLink {
             TemplateFullView(template: template)
         } label: {
             HStack {
-                Text(template.title)
-                Text("\(template.category) Workout")
-                Text("\(template.exercises.count) Exercises")
+                VStack (alignment: .leading) {
+                    Text(template.title)
+                        .font(.headline)
+                    Text("Category: \(template.category)")
+                        .font(.footnote)
+                        .foregroundStyle(Color.secondary)
+                }
             }
         }
     }
