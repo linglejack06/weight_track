@@ -10,6 +10,7 @@ import SwiftData
 
 struct ProgressView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     @State private var activeWorkout: ActiveWorkout
     
     init (template: WorkoutTemplate = WorkoutTemplate(), context: ModelContext) {
@@ -17,8 +18,28 @@ struct ProgressView: View {
         context.insert(activeWorkout)
     }
     
+    func cancelWorkout () {
+        modelContext.delete(activeWorkout)
+        dismiss()
+    }
+    
     var body: some View {
-        Text(activeWorkout.template.title)
+        NavigationStack {
+            Form {
+                Text(activeWorkout.template.title)
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Cancel", action: cancelWorkout)
+                }
+                ToolbarItem(placement: .principal) {
+                    Text(activeWorkout.template.title)
+                }
+                ToolbarItem {
+                    Button("Save", action: { dismiss() })
+                }
+            }
+        }
     }
 }
 

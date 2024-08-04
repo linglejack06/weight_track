@@ -12,7 +12,10 @@ struct ExerciseRowView: View {
     var body: some View {
         HStack {
             Text(exercise.name)
+            Spacer()
+            Spacer()
             Text("\(exercise.numOfSets) Sets")
+            Spacer()
         }
     }
 }

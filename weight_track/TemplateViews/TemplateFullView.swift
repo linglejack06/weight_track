@@ -18,14 +18,16 @@ struct TemplateFullView: View {
         return count
     }
     
+    @State private var presentProgress = false
+    
     var body: some View {
         List {
             Section {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("\(template.exercises.count) Exercises")
+                        Text("\(template.exercises.count) Exercise" + (template.exercises.count > 1 ? "s" : ""))
                             .font(.headline)
-                        Text("\(setCount) Total Sets")
+                        Text("\(setCount) Total Set" + (setCount > 1 ? "s" : ""))
                             .font(.headline)
                     }
                     Spacer()
@@ -37,7 +39,7 @@ struct TemplateFullView: View {
             }
             .listRowSeparator(.hidden)
             Section("Exercises") {
-                List(template.exercises) { exercise in
+                ForEach(template.exercises) { exercise in
                     ExerciseRowView(exercise: exercise)
                 }
             }
@@ -52,12 +54,11 @@ struct TemplateFullView: View {
                 }
             }
             ToolbarItem {
-                NavigationLink {
-                    ProgressView(template: template, context: modelContext)
-                } label: {
-                    Text("Start Workout")
-                }
+                Button("Start Workout", action: {presentProgress = true})
             }
+        }
+        .fullScreenCover(isPresented: $presentProgress) {
+            ProgressView(template: template, context: modelContext)
         }
     }
 }
