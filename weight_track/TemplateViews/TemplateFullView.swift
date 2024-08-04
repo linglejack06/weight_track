@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TemplateFullView: View {
     @Environment (\.modelContext) var modelContext
+    @Query private var activeWorkouts: [ActiveWorkout]
     let template: WorkoutTemplate
     var setCount: Int {
         var count = 0
@@ -19,6 +21,19 @@ struct TemplateFullView: View {
     }
     
     @State private var presentProgress = false
+    @State private var hasStartError = false
+    
+    func updatePresentProgress () {
+        for workout in activeWorkouts {
+            if Calendar.current.isDateInToday(workout.date) && !workout.isComplete {
+                // show an eror alert
+                hasStartError = true
+                return
+            }
+        }
+        
+        presentProgress = true
+    }
     
     var body: some View {
         List {
@@ -54,11 +69,16 @@ struct TemplateFullView: View {
                 }
             }
             ToolbarItem {
-                Button("Start Workout", action: {presentProgress = true})
+                Button("Start Workout", action: updatePresentProgress)
             }
         }
         .fullScreenCover(isPresented: $presentProgress) {
             ProgressView(template: template, context: modelContext)
+        }
+        .alert("Error", isPresented: $hasStartError) {
+            Button("OK") {}
+        } message: {
+            Text("There is already a workout in progress for today. Delete to start a new one")
         }
     }
 }

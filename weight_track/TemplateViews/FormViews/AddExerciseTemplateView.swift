@@ -56,6 +56,7 @@ struct AddExerciseTemplateView: View {
     func useSuggestion(_ exercise: ExerciseTemplate) {
         exerciseName = exercise.name
         numOfSets = exercise.numOfSets
+        presentPopover = false
     }
     var body: some View {
         List {

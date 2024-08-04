@@ -28,7 +28,6 @@ struct AddTemplateView: View {
             var alreadyExercises = [ExerciseTemplate]()
             for exercise in exercises {
                 if let existingExercise = existingExercises.first(where: { $0.name == exercise.name && $0.numOfSets == exercise.numOfSets }) {
-                    print(existingExercise)
                     alreadyExercises.append(existingExercise)
                 } else {
                     completeExercises.append(exercise)

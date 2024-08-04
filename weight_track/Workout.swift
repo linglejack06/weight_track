@@ -43,11 +43,13 @@ class ActiveWorkout {
     var date: Date
     @Relationship(deleteRule: .cascade) var exercises = [ActiveExercise]()
     var template: WorkoutTemplate
+    var isComplete: Bool
     
-    init(template: WorkoutTemplate = WorkoutTemplate(), date: Date = .now) {
+    init(template: WorkoutTemplate = WorkoutTemplate(), date: Date = .now, isComplete: Bool = false) {
         self.template = template
         self.date = date
         self.exercises = template.exercises.map { ActiveExercise(template: $0) }
+        self.isComplete = isComplete
     }
 }
 
