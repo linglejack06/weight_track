@@ -11,16 +11,10 @@ import SwiftData
 @main
 struct weight_trackApp: App {
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            WorkoutTemplate.self,
-            ActiveWorkout.self,
-            ExerciseTemplate.self,
-            ActiveExercise.self,
-        ])
-        let modelConfiguration = ModelConfiguration(for: WorkoutTemplate.self, ActiveWorkout.self, ExerciseTemplate.self, ActiveExercise.self)
+        let modelConfiguration = ModelConfiguration()
 
         do {
-            return try ModelContainer(for: WorkoutTemplate.self, ActiveWorkout.self, ExerciseTemplate.self, ActiveExercise.self, configurations: modelConfiguration)
+            return try ModelContainer(for: WorkoutTemplate.self, ActiveWorkout.self, configurations: modelConfiguration)
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }

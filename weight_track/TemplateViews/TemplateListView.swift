@@ -14,6 +14,12 @@ struct TemplateListView: View {
     
     func deleteTemplate(_ indexSet: IndexSet) {
         for index in indexSet {
+            // delete exercises with only this template as parent
+            for exercise in workouts[index].exercises {
+                if exercise.workoutTemplates.count == 1 {
+                    modelContext.delete(exercise)
+                }
+            }
             modelContext.delete(workouts[index])
         }
     }
@@ -30,10 +36,12 @@ struct TemplateListView: View {
         }
         _workouts = Query(filter: filter)
     }
+
     var body: some View {
         if (workouts.count > 0) {
             ForEach(workouts) { workout in
                 TemplateCardView(template: workout)
+                Text("\(workout.exercises.count)")
             }
             .onDelete(perform: deleteTemplate)
         } else {

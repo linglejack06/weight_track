@@ -35,8 +35,13 @@ struct AddTemplateView: View {
                 }
             }
             
-            let workoutToAdd = WorkoutTemplate(title: title, exercises: completeExercises, category: category)
+            let workoutToAdd = WorkoutTemplate(title: title, exercises: [], category: category)
             modelContext.insert(workoutToAdd)
+            
+            for ex in completeExercises {
+                modelContext.insert(ex)
+                workoutToAdd.exercises.append(ex)
+            }
             
             // append without inserting ( will create new versions of exercises )
             for ex in alreadyExercises {

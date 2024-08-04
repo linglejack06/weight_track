@@ -6,13 +6,19 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ProgressView: View {
+    @Environment(\.modelContext) private var modelContext
+    @State private var activeWorkout: ActiveWorkout
+    
+    init (template: WorkoutTemplate = WorkoutTemplate(), context: ModelContext) {
+        activeWorkout = ActiveWorkout(template: template)
+        context.insert(activeWorkout)
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(activeWorkout.template.title)
     }
 }
 
-#Preview {
-    ProgressView()
-}

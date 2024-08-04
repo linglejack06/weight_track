@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TemplateFullView: View {
+    @Environment (\.modelContext) var modelContext
     let template: WorkoutTemplate
     var setCount: Int {
         var count = 0
@@ -51,12 +52,12 @@ struct TemplateFullView: View {
                 }
             }
             ToolbarItem {
-                Button("Start Workout") {}
+                NavigationLink {
+                    ProgressView(template: template, context: modelContext)
+                } label: {
+                    Text("Start Workout")
+                }
             }
         }
     }
-}
-
-#Preview {
-    TemplateFullView(template: sampleWorkoutTemplate)
 }
