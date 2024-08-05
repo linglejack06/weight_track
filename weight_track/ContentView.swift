@@ -24,7 +24,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
-            Text("home")
+            HistoryView()
                 .tabItem {
                     Label("History", systemImage: "clock")
                 }

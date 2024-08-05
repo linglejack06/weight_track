@@ -20,7 +20,13 @@ struct HistoryView: View {
         return nil
     }
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            if (activeWorkout != nil) {
+                Section("Active Workout") {
+                    Text(activeWorkout!.template.title)
+                }
+            }
+        }
     }
 }
 
