@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct HistoryView: View {
+    @Environment(\.modelContext) private var modelContext
     @Query private var workouts: [ActiveWorkout]
     
     var activeWorkout: ActiveWorkout? {
@@ -24,7 +25,7 @@ struct HistoryView: View {
             if (activeWorkout != nil) {
                 Section("Incomplete Workout") {
                     NavigationLink {
-                        ProgressView(activeWorkout: activeWorkout!)
+                        ProgressView(activeWorkout: activeWorkout!, context: modelContext)
                     } label: {
                         ActiveCardView(activeWorkout: activeWorkout!)
                     }

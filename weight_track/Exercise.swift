@@ -8,6 +8,26 @@
 import Foundation
 import SwiftData
 
+enum WeightType: String, CaseIterable, Codable {
+    case pounds = "lbs"
+    case kilograms = "kg"
+}
+
+@Model
+class Set {
+    var weight: Float
+    var reps: Int
+    var unit: WeightType
+    @Relationship(inverse: \ActiveExercise.sets) var exercise: ActiveExercise?
+    
+    init(weight: Float = 0.0, reps: Int = 0, unit: WeightType = .pounds, exercise: ActiveExercise? = nil) {
+        self.weight = weight
+        self.reps = reps
+        self.unit = unit
+        self.exercise = exercise
+    }
+}
+
 @Model
 class ExerciseTemplate {
     var numOfSets: Int
@@ -23,16 +43,14 @@ class ExerciseTemplate {
 
 @Model
 class ActiveExercise {
-    var weight: [Float]
-    var reps: [Int]
+    var sets: [Set]
     var template: ExerciseTemplate
     var workout: ActiveWorkout?
     var date: Date
     
-    init(template: ExerciseTemplate = ExerciseTemplate(), weight: [Float] = [], reps: [Int] = [], workout: ActiveWorkout? = nil, date: Date = .now) {
+    init(template: ExerciseTemplate = ExerciseTemplate(), sets: [Set] = [], workout: ActiveWorkout? = nil, date: Date = .now) {
         self.template = template
-        self.weight = weight
-        self.reps = reps
+        self.sets = sets
         self.workout = workout
         self.date = date
     }
