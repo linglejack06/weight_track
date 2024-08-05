@@ -22,8 +22,12 @@ struct HistoryView: View {
     var body: some View {
         List {
             if (activeWorkout != nil) {
-                Section("Active Workout") {
-                    Text(activeWorkout!.template.title)
+                Section("Incomplete Workout") {
+                    NavigationLink {
+                        ProgressView(activeWorkout: activeWorkout!)
+                    } label: {
+                        ActiveCardView(activeWorkout: activeWorkout!)
+                    }
                 }
             }
         }

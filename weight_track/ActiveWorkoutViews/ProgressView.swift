@@ -18,6 +18,11 @@ struct ProgressView: View {
         context.insert(activeWorkout)
     }
     
+    init(activeWorkout: ActiveWorkout) {
+        self.activeWorkout = activeWorkout
+        // fast forward to first exercise not completed
+    }
+    
     func cancelWorkout () {
         modelContext.delete(activeWorkout)
         dismiss()
