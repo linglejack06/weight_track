@@ -13,9 +13,6 @@ struct ProgressView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var activeWorkout: ActiveWorkout
     @State private var currentExercise: ActiveExercise
-    @State private var weight: Float = 0.0
-    @State private var weightType: WeightType = .pounds
-    @State private var reps: Int = 0
     
     init (template: WorkoutTemplate = WorkoutTemplate(), context: ModelContext) {
         activeWorkout = ActiveWorkout(template: template)
@@ -23,8 +20,6 @@ struct ProgressView: View {
         
         context.insert(activeWorkout)
         context.insert(currentExercise)
-        
-        activeWorkout.exercises.append(currentExercise)
     }
     
     init(activeWorkout: ActiveWorkout, context: ModelContext) {
@@ -39,7 +34,6 @@ struct ProgressView: View {
             context.insert(currentExercise)
             self.activeWorkout.exercises.append(currentExercise)
         }
-        
     }
     
     func goToNextExercise () {
@@ -62,19 +56,30 @@ struct ProgressView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Text(currentExercise.template.name)
-                    .font(.headline)
-                AddSetView(sets: $currentExercise.sets, exerciseSets: currentExercise.template.numOfSets, goToNextExercise: goToNextExercise)
+                HStack {
+                    Text(currentExercise.template.name)
+                        .font(.headline)
+                    Spacer()
+                    Text("\(currentExercise.template.numOfSets) Sets")
+                        .font(.headline)
+                }
+                Section("Sets") {
+                    AddSetView(currentExercise: $currentExercise, exerciseSets: currentExercise.template.numOfSets, goToNextExercise: goToNextExercise)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Cancel", action: cancelWorkout)
+                    Button("Close", action: { dismiss() })
                 }
                 ToolbarItem(placement: .principal) {
                     Text(activeWorkout.template.title)
                 }
                 ToolbarItem {
-                    Button("Save", action: { dismiss() })
+                    if(activeWorkout.template.exercises.count == activeWorkout.exercises.count) {
+                        Button("Finish", action: {})
+                    } else {
+                        Button("Move On", action: goToNextExercise)
+                    }
                 }
             }
         }

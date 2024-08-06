@@ -8,50 +8,65 @@
 import SwiftUI
 
 struct AddSetView: View {
-    @State private var weight: Float = 0.0
+    @State private var weight: Float? = nil
     @State private var weightType: WeightType = .pounds
-    @State private var reps: Int = 0
-    @Binding var sets: [Set]
+    @State private var reps: Int? = nil
+    @Binding var currentExercise: ActiveExercise
     let exerciseSets: Int
     let goToNextExercise: () -> Void
     
     func addSet () {
-        sets.append(Set(weight: self.weight, reps: self.reps, unit: self.weightType))
-        weight = 0.0
-        reps = 0
+        currentExercise.sets.append(Set(weight: self.weight!, reps: self.reps!, unit: self.weightType))
+        weight = nil
+        reps = nil
         
-        if (exerciseSets == sets.count) {
+        if (exerciseSets == currentExercise.sets.count) {
             goToNextExercise()
         }
     }
     
     func deleteSet(_ indexSet: IndexSet) {
-        sets.remove(atOffsets: indexSet)
+        currentExercise.sets.remove(atOffsets: indexSet)
     }
     
     func moveSet(from source: IndexSet, to destination: Int) {
-        sets.move(fromOffsets: source, toOffset: destination)
+        currentExercise.sets.move(fromOffsets: source, toOffset: destination)
     }
     var body: some View {
         List {
-            ForEach($sets) { $set in
-                
+            ForEach(currentExercise.sets.reversed()) { set in
+                HStack {
+                    Text("\(set.weight)")
+                    Text("\(set.reps)")
+                }
             }
             .onDelete(perform: deleteSet)
             .onMove(perform: moveSet)
         }
-        HStack {
-            Text("Set \(sets.count + 1) of \(exerciseSets)")
-            TextField("Weight", value: $weight, format: .number)
-                .keyboardType(.decimalPad)
-            Picker("", selection: $weightType) {
-                ForEach(WeightType.allCases, id: \.self) { type in
-                    Text(type.rawValue)
+        HStack (alignment: .lastTextBaseline){
+            VStack (alignment: .leading, spacing: 2) {
+                Text("Set \(currentExercise.sets.count + 1) of \(exerciseSets)")
+                    .foregroundStyle(Color.secondary)
+                    .font(.caption)
+                HStack {
+                    TextField("Weight", value: $weight, format: .number)
+                        .keyboardType(.decimalPad)
+                    Picker("", selection: $weightType) {
+                        ForEach(WeightType.allCases, id: \.self) { type in
+                            Text(type.rawValue)
+                        }
+                    }
+                    .pickerStyle(.segmented)
                 }
             }
             TextField("Reps", value: $reps, format: .number)
                 .keyboardType(.numberPad)
+        }
+        HStack {
+            Spacer()
             Button("Add Set", action: addSet)
+                .disabled(weight == nil || reps == nil || reps == 0)
+            Spacer()
         }
     }
 }

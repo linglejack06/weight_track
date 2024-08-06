@@ -14,24 +14,43 @@ struct HistoryView: View {
     @State private var presentProgress = false
     
     var activeWorkout: ActiveWorkout? {
-        for workout in workouts {
-            if Calendar.current.isDateInToday(workout.date) && !workout.isComplete {
-                return workout
+        get {
+            for workout in workouts {
+                if Calendar.current.isDateInToday(workout.date) && !workout.isComplete {
+                    return workout
+                }
             }
+            return nil
         }
-        return nil
+        set(newWorkout) {
+            
+        }
     }
+    
+    func deleteActiveWorkout () {
+        modelContext.delete(activeWorkout!)
+    }
+    
     var body: some View {
         List {
             if (activeWorkout != nil) {
                 Section("Incomplete Workout") {
-                    Button { presentProgress = true } label: {
+                    VStack {
                         ActiveCardView(activeWorkout: activeWorkout!)
+                        HStack {
+                            Button("Delete", action: deleteActiveWorkout )
+                                .buttonStyle(BorderlessButtonStyle())
+                            Spacer()
+                            Button("Continue", action: { presentProgress = true })
+                                .buttonStyle(BorderlessButtonStyle())
+                        }
                     }
                 }
-                .fullScreenCover(isPresented: $presentProgress) {
-                    ProgressView(activeWorkout: self.activeWorkout!, context: modelContext)
-                }
+            }
+        }
+        .fullScreenCover(isPresented: $presentProgress) {
+            if (activeWorkout != nil) {
+                ProgressView(activeWorkout: self.activeWorkout!, context: modelContext)
             }
         }
     }
@@ -39,4 +58,5 @@ struct HistoryView: View {
 
 #Preview {
     HistoryView()
+        .modelContainer(for: ActiveWorkout.self)
 }
