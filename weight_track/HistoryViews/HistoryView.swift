@@ -11,6 +11,7 @@ import SwiftData
 struct HistoryView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var workouts: [ActiveWorkout]
+    @State private var presentProgress = false
     
     var activeWorkout: ActiveWorkout? {
         for workout in workouts {
@@ -24,11 +25,12 @@ struct HistoryView: View {
         List {
             if (activeWorkout != nil) {
                 Section("Incomplete Workout") {
-                    NavigationLink {
-                        ProgressView(activeWorkout: activeWorkout!, context: modelContext)
-                    } label: {
+                    Button { presentProgress = true } label: {
                         ActiveCardView(activeWorkout: activeWorkout!)
                     }
+                }
+                .fullScreenCover(isPresented: $presentProgress) {
+                    ProgressView(activeWorkout: self.activeWorkout!, context: modelContext)
                 }
             }
         }

@@ -30,21 +30,16 @@ struct ProgressView: View {
     init(activeWorkout: ActiveWorkout, context: ModelContext) {
         self.activeWorkout = activeWorkout
         // fast forward to first exercise not completed
-        let nextExercise = activeWorkout.template.exercises[activeWorkout.exercises.count]
-        currentExercise = ActiveExercise(template: nextExercise)
-        
-        context.insert(currentExercise)
-        self.activeWorkout.exercises.append(currentExercise)
-    }
-    
-    func addSet () {
-        currentExercise.sets.append(Set(weight: self.weight, reps: self.reps, unit: self.weightType))
-        weight = 0.0
-        reps = 0
-        
-        if (currentExercise.template.numOfSets == currentExercise.sets.count) {
-            goToNextExercise()
+        let possibleExercise = activeWorkout.exercises.last
+        if(possibleExercise != nil && possibleExercise!.sets.count != possibleExercise!.template.numOfSets) {
+            currentExercise = possibleExercise!
+        } else {
+            let nextExercise = activeWorkout.template.exercises[activeWorkout.exercises.count]
+            currentExercise = ActiveExercise(template: nextExercise)
+            context.insert(currentExercise)
+            self.activeWorkout.exercises.append(currentExercise)
         }
+        
     }
     
     func goToNextExercise () {
@@ -63,10 +58,13 @@ struct ProgressView: View {
         dismiss()
     }
     
+    
     var body: some View {
         NavigationStack {
             Form {
                 Text(currentExercise.template.name)
+                    .font(.headline)
+                AddSetView(sets: $currentExercise.sets, exerciseSets: currentExercise.template.numOfSets, goToNextExercise: goToNextExercise)
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
