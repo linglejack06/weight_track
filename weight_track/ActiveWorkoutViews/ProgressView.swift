@@ -64,7 +64,7 @@ struct ProgressView: View {
                         .font(.headline)
                 }
                 Section("Sets") {
-                    AddSetView(currentExercise: $currentExercise, exerciseSets: currentExercise.template.numOfSets, goToNextExercise: goToNextExercise)
+                    AddSetView(template: activeWorkout.template, currentExercise: $currentExercise, exerciseSets: currentExercise.template.numOfSets, goToNextExercise: goToNextExercise)
                 }
             }
             .toolbar {
