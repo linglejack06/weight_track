@@ -12,6 +12,8 @@ struct HistoryView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var workouts: [ActiveWorkout]
     @State private var presentProgress = false
+    @State private var sortedCategory: WorkoutCategoryWithAll = .all
+    @State private var searchBy = ""
     
     var activeWorkout: ActiveWorkout? {
         get {
@@ -32,26 +34,41 @@ struct HistoryView: View {
     }
     
     var body: some View {
-        List {
-            if (activeWorkout != nil) {
-                Section("Incomplete Workout") {
-                    VStack {
-                        ActiveCardView(activeWorkout: activeWorkout!)
-                        HStack {
-                            Button("Delete", action: deleteActiveWorkout )
-                                .buttonStyle(BorderlessButtonStyle())
-                            Spacer()
-                            Button("Continue", action: { presentProgress = true })
-                                .buttonStyle(BorderlessButtonStyle())
+        NavigationStack {
+            List {
+                if (activeWorkout != nil) {
+                    Section("Incomplete Workout") {
+                        VStack {
+                            ActiveCardView(activeWorkout: activeWorkout!)
+                            HStack {
+                                Button("Delete", action: deleteActiveWorkout )
+                                    .buttonStyle(BorderlessButtonStyle())
+                                Spacer()
+                                Button("Continue", action: { presentProgress = true })
+                                    .buttonStyle(BorderlessButtonStyle())
+                            }
                         }
                     }
                 }
+                Section("Completed Workouts") {
+                    Section {
+                        HStack (alignment: .center, spacing: 0) {
+                            Picker("Category", selection: $sortedCategory) {
+                                ForEach(WorkoutCategoryWithAll.allCases, id: \.self) { category in
+                                    Text("\(category.rawValue)")
+                                }
+                            }
+                        }
+                    }
+                    ActiveWorkoutListView(sortedCategory: self.sortedCategory, searchBy: self.searchBy)
+                }
             }
-        }
-        .fullScreenCover(isPresented: $presentProgress) {
-            if (activeWorkout != nil) {
-                ProgressView(activeWorkout: self.activeWorkout!, context: modelContext)
+            .fullScreenCover(isPresented: $presentProgress) {
+                if (activeWorkout != nil) {
+                    ProgressView(activeWorkout: self.activeWorkout!, context: modelContext)
+                }
             }
+            .searchable(text: $searchBy)
         }
     }
 }
