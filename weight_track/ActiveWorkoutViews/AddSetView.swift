@@ -16,6 +16,7 @@ struct AddSetView: View {
     @State private var lastWeight: Float = 0.0
     @State private var lastReps: Int = 0
     @State private var lastUnit: WeightType = .pounds
+    @State private var setNumber = 1
     @Query private var previousWorkouts: [ActiveWorkout]
     @Binding var currentExercise: ActiveExercise
     var exerciseSets: Int
@@ -37,9 +38,7 @@ struct AddSetView: View {
         weight = nil
         reps = nil
         
-        if (exerciseSets == currentExercise.sets.count) {
-            goToNextExercise()
-        }
+        setNumber += 1
     }
     
     func deleteSet(_ indexSet: IndexSet) {
@@ -57,13 +56,13 @@ struct AddSetView: View {
     }
     
     func findSetSuggestion() {
-        if let previousWorkout: ActiveWorkout = previousWorkouts.sorted(by: { $0.date > $1.date }).first(where: { $0.isComplete}) {
+        if let previousWorkout: ActiveWorkout = previousWorkouts.sorted(by: { $0.date > $1.date }).first(where: { $0.isComplete }) {
             
             if let previousExercise: ActiveExercise = previousWorkout.exercises.first(where: { $0.template.name == currentExercise.template.name }) {
                 var previousSet: Set?
                 
-                if (previousExercise.sets.count < currentExercise.sets.count) {
-                    previousSet = previousExercise.sets[currentExercise.sets.count]
+                if (previousExercise.sets.count >= currentExercise.sets.count) {
+                    previousSet = previousExercise.sets[currentExercise.sets.count > 0 ? currentExercise.sets.count - 1 : 0]
                 } else {
                     previousSet = previousExercise.sets.last
                 }
@@ -84,52 +83,51 @@ struct AddSetView: View {
     var body: some View {
         List {
             ForEach(currentExercise.sets.reversed()) { set in
-                HStack {
-                    Text("\(set.weight)")
-                    Text("\(set.reps)")
-                }
+                SetRowView(set: set)
             }
             .onDelete(perform: deleteSet)
             .onMove(perform: moveSet)
         }
-        HStack (alignment: .lastTextBaseline){
-            VStack (alignment: .leading, spacing: 2) {
-                Text("Set \(currentExercise.sets.count + 1) of \(exerciseSets)")
-                    .foregroundStyle(Color.secondary)
-                    .font(.caption)
-                HStack {
-                    TextField("Weight", value: $weight, format: .number)
-                        .keyboardType(.decimalPad)
-                        .onChange(of: weight){ oldValue, newValue in
-                            findSetSuggestion()
-                        }
-                        .popover(isPresented: $presentPopover, arrowEdge: .bottom) {
-                            Button { useSuggestion() } label: {
-                                VStack(alignment: .leading) {
-                                    Text("Last Time")
-                                    HStack {
-                                        Text("\(lastWeight) \(lastUnit.rawValue)")
-                                        Text("\(lastReps) Reps")
+        if(currentExercise.sets.count < exerciseSets) {
+            HStack (alignment: .lastTextBaseline){
+                VStack (alignment: .leading, spacing: 2) {
+                    Text("Set \(currentExercise.sets.count + 1) of \(exerciseSets)")
+                        .foregroundStyle(Color.secondary)
+                        .font(.caption)
+                    HStack {
+                        TextField("Weight", value: $weight, format: .number)
+                            .keyboardType(.decimalPad)
+                            .onChange(of: weight){ oldValue, newValue in
+                                findSetSuggestion()
+                            }
+                            .popover(isPresented: $presentPopover, arrowEdge: .bottom) {
+                                Button { useSuggestion() } label: {
+                                    VStack(alignment: .leading) {
+                                        Text("Last Time")
+                                        HStack {
+                                            Text("\(lastWeight) \(lastUnit.rawValue)")
+                                            Text("\(lastReps) Reps")
+                                        }
                                     }
                                 }
+                                .padding(4)
+                                .presentationCompactAdaptation(.popover)
                             }
-                            .padding(4)
-                            .presentationCompactAdaptation(.popover)
+                        Picker("", selection: $weightType) {
+                            ForEach(WeightType.allCases, id: \.self) { type in
+                                Text(type.rawValue)
+                            }
                         }
-                    Picker("", selection: $weightType) {
-                        ForEach(WeightType.allCases, id: \.self) { type in
-                            Text(type.rawValue)
-                        }
+                        .pickerStyle(.segmented)
+                        TextField("Reps", value: $reps, format: .number)
+                            .keyboardType(.numberPad)
                     }
-                    .pickerStyle(.segmented)
-                    TextField("Reps", value: $reps, format: .number)
-                        .keyboardType(.numberPad)
-                }
-                HStack {
-                    Spacer()
-                    Button("Add Set", action: addSet)
-                        .disabled(weight == nil || reps == nil || reps == 0)
-                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button("Add Set", action: addSet)
+                            .disabled(weight == nil || reps == nil || reps == 0)
+                        Spacer()
+                    }
                 }
             }
         }

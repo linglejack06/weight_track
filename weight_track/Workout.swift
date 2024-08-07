@@ -48,7 +48,7 @@ class ActiveWorkout {
     init(template: WorkoutTemplate = WorkoutTemplate(), date: Date = .now, isComplete: Bool = false) {
         self.template = template
         self.date = date
-        self.exercises = template.exercises.map { ActiveExercise(template: $0) }
+        self.exercises = []
         self.isComplete = isComplete
     }
 }

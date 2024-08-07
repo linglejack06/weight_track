@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C173D412C63C746003752B0 /* SetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C173D402C63C746003752B0 /* SetRowView.swift */; };
 		5C1CE6F62C5D2E9A0005CE5B /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1CE6F52C5D2E9A0005CE5B /* ProgressView.swift */; };
 		5C1CE6F82C5D2FBC0005CE5B /* ExerciseRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1CE6F72C5D2FBC0005CE5B /* ExerciseRowView.swift */; };
 		5C1DBE342C5C33F700B28D02 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1DBE332C5C33F700B28D02 /* HomeView.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C173D402C63C746003752B0 /* SetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRowView.swift; sourceTree = "<group>"; };
 		5C1CE6F52C5D2E9A0005CE5B /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		5C1CE6F72C5D2FBC0005CE5B /* ExerciseRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRowView.swift; sourceTree = "<group>"; };
 		5C1DBE332C5C33F700B28D02 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				5C1CE6F52C5D2E9A0005CE5B /* ProgressView.swift */,
 				5C96F80A2C6273CA00C8985D /* AddSetView.swift */,
+				5C173D402C63C746003752B0 /* SetRowView.swift */,
 			);
 			path = ActiveWorkoutViews;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				5CEAB3642C6133BD00260B95 /* ActiveCardView.swift in Sources */,
 				5C6BB8112C4E97DE00C6C414 /* ContentView.swift in Sources */,
 				5CEE25202C5800ED00302F61 /* TemplateListView.swift in Sources */,
+				5C173D412C63C746003752B0 /* SetRowView.swift in Sources */,
 				5C1CE6F82C5D2FBC0005CE5B /* ExerciseRowView.swift in Sources */,
 				5CCA4ACD2C6025CA00CDA364 /* HistoryView.swift in Sources */,
 				5C1DBE342C5C33F700B28D02 /* HomeView.swift in Sources */,

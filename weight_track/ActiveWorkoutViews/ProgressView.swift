@@ -20,24 +20,27 @@ struct ProgressView: View {
         
         context.insert(activeWorkout)
         context.insert(currentExercise)
+        
+        currentExercise.workout = activeWorkout
     }
     
     init(activeWorkout: ActiveWorkout, context: ModelContext) {
         self.activeWorkout = activeWorkout
         // fast forward to first exercise not completed
         let possibleExercise = activeWorkout.exercises.last
-        if(possibleExercise != nil && possibleExercise!.sets.count != possibleExercise!.template.numOfSets) {
+        if(possibleExercise != nil && (possibleExercise!.sets.count) != possibleExercise!.template.numOfSets) {
             currentExercise = possibleExercise!
         } else {
             let nextExercise = activeWorkout.template.exercises[activeWorkout.exercises.count]
             currentExercise = ActiveExercise(template: nextExercise)
             context.insert(currentExercise)
-            self.activeWorkout.exercises.append(currentExercise)
+            currentExercise.workout = self.activeWorkout
         }
     }
     
     func goToNextExercise () {
         if(activeWorkout.template.exercises.count == activeWorkout.exercises.count) {
+            finishWorkout()
             return
         }
         let nextExercise = activeWorkout.template.exercises[activeWorkout.exercises.count]
@@ -49,6 +52,11 @@ struct ProgressView: View {
     
     func cancelWorkout () {
         modelContext.delete(activeWorkout)
+        dismiss()
+    }
+    
+    func finishWorkout () {
+        activeWorkout.isComplete = true
         dismiss()
     }
     
@@ -76,7 +84,7 @@ struct ProgressView: View {
                 }
                 ToolbarItem {
                     if(activeWorkout.template.exercises.count == activeWorkout.exercises.count) {
-                        Button("Finish", action: {})
+                        Button("Finish", action: finishWorkout)
                     } else {
                         Button("Move On", action: goToNextExercise)
                     }

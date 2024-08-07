@@ -17,13 +17,21 @@ struct ActiveWorkoutListView: View {
         if (sortedCategory != .all) {
             let categoryToCompare = sortedCategory.rawValue
             filter = #Predicate<ActiveWorkout> {
-                $0.template.category == categoryToCompare && $0.template.title.localizedStandardContains(searchBy)
+                if $0.template.category == categoryToCompare {
+                    if $0.template.title.localizedStandardContains(searchBy) {
+                        return true
+                    } else {
+                        return false
+                    }
+                } else {
+                    return false
+                }
             }
         } else {
             filter = #Predicate<ActiveWorkout> { $0.template.title.localizedStandardContains(searchBy)
             }
         }
-        _activeWorkouts = Query(filter: filter, sort: \ActiveWorkout.date)
+        _activeWorkouts = Query()
     }
     
     var body: some View {

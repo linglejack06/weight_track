@@ -11,6 +11,7 @@ import SwiftData
 struct TemplateListView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var workouts: [WorkoutTemplate]
+    @Query private var activeWorkouts: [ActiveWorkout]
     
     func deleteTemplate(_ indexSet: IndexSet) {
         for index in indexSet {
@@ -36,9 +37,16 @@ struct TemplateListView: View {
         }
         _workouts = Query(filter: filter)
     }
+    
+    func delete () {
+        for activeWorkout in activeWorkouts {
+            modelContext.delete(activeWorkout)
+        }
+    }
 
     var body: some View {
         if (workouts.count > 0) {
+            Button("Delete active workouts") {delete ()}
             ForEach(workouts) { workout in
                 TemplateCardView(template: workout)
                 Text("\(workout.exercises.count)")
