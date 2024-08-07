@@ -18,9 +18,16 @@ struct ActiveCardView: View {
                     .font(.footnote)
                     .foregroundStyle(Color.secondary)
             }
+            Spacer()
+            Spacer()
             VStack (alignment: .leading) {
-                Text("\(activeWorkout.date)")
+                Text(activeWorkout.date, format: .dateTime.day().month().year())
+                    .font(.headline)
+                Text("At \(activeWorkout.date.formatted(date: .omitted, time: .shortened))")
+                    .font(.footnote)
+                    .foregroundStyle(Color.secondary)
             }
+            Spacer()
         }
     }
 }
