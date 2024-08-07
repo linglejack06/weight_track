@@ -18,7 +18,7 @@ struct ActiveWorkoutListView: View {
             let categoryToCompare = sortedCategory.rawValue
             filter = #Predicate<ActiveWorkout> {
                 if $0.template.category == categoryToCompare {
-                    if $0.template.title.localizedStandardContains(searchBy) {
+                    if searchBy == "" || $0.template.title.localizedStandardContains(searchBy) {
                         return true
                     } else {
                         return false
@@ -28,18 +28,20 @@ struct ActiveWorkoutListView: View {
                 }
             }
         } else {
-            filter = #Predicate<ActiveWorkout> { $0.template.title.localizedStandardContains(searchBy)
+            filter = #Predicate<ActiveWorkout> { searchBy == "" || $0.template.title.localizedStandardContains(searchBy)
             }
         }
-        _activeWorkouts = Query()
+        _activeWorkouts = Query(filter: filter, sort: \ActiveWorkout.date, order: .reverse)
     }
     
     var body: some View {
         ForEach(activeWorkouts) { workout in
-            NavigationLink {
-                ActiveFullView()
-            } label: {
-                ActiveCardView(activeWorkout: workout)
+            if(workout.isComplete) {
+                NavigationLink {
+                    ActiveFullView()
+                } label: {
+                    ActiveCardView(activeWorkout: workout)
+                }
             }
         }
     }

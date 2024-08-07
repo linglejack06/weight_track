@@ -51,15 +51,15 @@ struct HistoryView: View {
                     }
                 }
                 Section("Completed Workouts") {
-                    Section {
-                        HStack (alignment: .center, spacing: 0) {
-                            Picker("Category", selection: $sortedCategory) {
-                                ForEach(WorkoutCategoryWithAll.allCases, id: \.self) { category in
-                                    Text("\(category.rawValue)")
-                                }
+                    HStack (alignment: .center, spacing: 0) {
+                        Picker("Category", selection: $sortedCategory) {
+                            ForEach(WorkoutCategoryWithAll.allCases, id: \.self) { category in
+                                Text("\(category.rawValue)")
                             }
                         }
                     }
+                }
+                Section {
                     ActiveWorkoutListView(sortedCategory: self.sortedCategory, searchBy: self.searchBy)
                 }
             }
