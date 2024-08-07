@@ -53,6 +53,7 @@ struct AddSetView: View {
         self.weightType = lastUnit
         self.weight = lastWeight
         self.reps = lastReps
+        presentPopover = false
     }
     
     func findSetSuggestion() {
@@ -70,14 +71,13 @@ struct AddSetView: View {
                 if (previousSet != nil) {
                     lastWeight = previousSet!.weight
                     lastReps = previousSet!.reps
-                    presentPopover = true
                     return
                 }
             }
+        } else {
+            lastReps = 0
+            lastWeight = 0.0
         }
-        lastReps = 0
-        lastWeight = 0.0
-        presentPopover = false
     }
     
     var body: some View {
@@ -97,18 +97,31 @@ struct AddSetView: View {
                     HStack {
                         TextField("Weight", value: $weight, format: .number)
                             .keyboardType(.decimalPad)
-                            .onChange(of: weight){ oldValue, newValue in
-                                findSetSuggestion()
+                            .onChange(of: lastWeight) { oldValue, newValue in
+                                if newValue > 0 {
+                                    presentPopover = true
+                                } else {
+                                    presentPopover = false
+                                }
                             }
+                            .onTapGesture(perform: {
+                                findSetSuggestion()
+                            })
                             .popover(isPresented: $presentPopover, arrowEdge: .bottom) {
                                 Button { useSuggestion() } label: {
                                     VStack(alignment: .leading) {
                                         Text("Last Time")
+                                            .font(.headline)
+                                        Divider()
                                         HStack {
-                                            Text("\(lastWeight) \(lastUnit.rawValue)")
+                                            Image(systemName: "dumbbell")
+                                            Text(String(format: "%.2f", lastWeight) + " \(lastUnit.rawValue)")
                                             Text("\(lastReps) Reps")
                                         }
                                     }
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 2)
+                                    .foregroundStyle(Color.secondary)
                                 }
                                 .padding(4)
                                 .presentationCompactAdaptation(.popover)
