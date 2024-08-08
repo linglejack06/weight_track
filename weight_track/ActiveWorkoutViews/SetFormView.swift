@@ -17,11 +17,18 @@ struct SetFormView: View {
     @State private var previousSets: [Set] = []
     @Binding var currentExercise: ActiveExercise
     let exerciseSets: Int
+    let goToNextExercise: () -> Void
     
     func addSet () {
         currentExercise.sets.append(Set(weight: self.weight, reps: self.reps, unit: self.weightType))
         weight = 0.0
         reps = 0
+        
+        if(currentExercise.sets.count == exerciseSets) {
+            goToNextExercise()
+        }
+        
+        presentPopover = false
     }
     
     func useSuggestion(previousSet: Set) {
@@ -63,6 +70,7 @@ struct SetFormView: View {
                                         .padding(.horizontal, 8)
                                         .padding(.vertical, 2)
                                         .foregroundStyle(Color.secondary)
+                                        .buttonStyle(BorderlessButtonStyle())
                                     }
                                 }
                                 .padding(4)

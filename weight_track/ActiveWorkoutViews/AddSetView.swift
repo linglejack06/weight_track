@@ -78,7 +78,7 @@ struct AddSetView: View {
                 .onMove(perform: moveSet)
             }
             if(currentExercise.sets.count < exerciseSets) {
-                SetFormView(currentExercise: $currentExercise, exerciseSets: exerciseSets)
+                SetFormView(currentExercise: $currentExercise, exerciseSets: exerciseSets, goToNextExercise: goToNextExercise)
             }
         }
     }

@@ -30,11 +30,13 @@ struct ProgressView: View {
         let possibleExercise = activeWorkout.exercises.last
         if(possibleExercise != nil && (possibleExercise!.sets.count) != possibleExercise!.template.numOfSets) {
             currentExercise = possibleExercise!
-        } else {
+        } else if activeWorkout.exercises.count < activeWorkout.template.exercises.count {
             let nextExercise = activeWorkout.template.exercises[activeWorkout.exercises.count]
             currentExercise = ActiveExercise(template: nextExercise)
             context.insert(currentExercise)
             currentExercise.workout = self.activeWorkout
+        } else {
+            currentExercise = activeWorkout.exercises.last!
         }
     }
     
