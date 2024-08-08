@@ -9,11 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct AddSetView: View {
-    @State private var weight: Float? = nil
+    @State private var weight: Double? = nil
     @State private var weightType: WeightType = .pounds
     @State private var reps: Int? = nil
     @State private var presentPopover = false
-    @State private var lastWeight: Float = 0.0
+    @State private var lastWeight: Double = 0.0
     @State private var lastReps: Int = 0
     @State private var lastUnit: WeightType = .pounds
     @State private var setNumber = 1
@@ -24,10 +24,7 @@ struct AddSetView: View {
     
     init (template: WorkoutTemplate, currentExercise: Binding<ActiveExercise>, exerciseSets: Int, goToNextExercise: @escaping () -> Void) {
         let titleToCompare = template.title
-        let filter = #Predicate<ActiveWorkout> {
-            $0.template.title == titleToCompare
-        }
-        _previousWorkouts = Query(filter: filter)
+        _previousWorkouts = Query()
         _currentExercise = currentExercise
         self.exerciseSets = exerciseSets
         self.goToNextExercise = goToNextExercise
@@ -80,7 +77,42 @@ struct AddSetView: View {
         }
     }
     
+    func convertToUnit(_ unit: WeightType) {
+        if unit == .kilograms && weight != nil {
+            let measurement = Measurement(value: weight!, unit: UnitMass.pounds)
+            let kgConversion = measurement.converted(to: UnitMass.kilograms)
+            weight = kgConversion.value
+        } else if unit == .pounds && weight != nil {
+            let measurement = Measurement(value: weight!, unit: UnitMass.kilograms)
+            let lbConversion = measurement.converted(to: UnitMass.pounds)
+            weight = lbConversion.value
+        }
+        
+        for set in currentExercise.sets {
+            if unit == .kilograms {
+                let measurement = Measurement(value: set.weight, unit: UnitMass.pounds)
+                let kgConversion = measurement.converted(to: UnitMass.kilograms)
+                set.weight = kgConversion.value
+                set.unit = .kilograms
+            } else if unit == .pounds {
+                let measurement = Measurement(value: set.weight, unit: UnitMass.kilograms)
+                let lbConversion = measurement.converted(to: UnitMass.pounds)
+                set.weight = lbConversion.value
+                set.unit = .pounds
+            }
+        }
+    }
+    
     var body: some View {
+        Picker("", selection: $weightType) {
+            ForEach(WeightType.allCases, id: \.self) { type in
+                Text(type.rawValue)
+            }
+            .onChange(of: weightType) { oldValue, newValue in
+                convertToUnit(newValue)
+            }
+        }
+        .pickerStyle(.segmented)
         List {
             ForEach(currentExercise.sets.reversed()) { set in
                 SetRowView(set: set)
@@ -126,12 +158,6 @@ struct AddSetView: View {
                                 .padding(4)
                                 .presentationCompactAdaptation(.popover)
                             }
-                        Picker("", selection: $weightType) {
-                            ForEach(WeightType.allCases, id: \.self) { type in
-                                Text(type.rawValue)
-                            }
-                        }
-                        .pickerStyle(.segmented)
                         TextField("Reps", value: $reps, format: .number)
                             .keyboardType(.numberPad)
                     }

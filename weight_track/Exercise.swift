@@ -15,12 +15,12 @@ enum WeightType: String, CaseIterable, Codable {
 
 @Model
 class Set {
-    var weight: Float
+    var weight: Double
     var reps: Int
     var unit: WeightType
     @Relationship(inverse: \ActiveExercise.sets) var exercise: ActiveExercise?
     
-    init(weight: Float = 0.0, reps: Int = 0, unit: WeightType = .pounds, exercise: ActiveExercise? = nil) {
+    init(weight: Double = 0.0, reps: Int = 0, unit: WeightType = .pounds, exercise: ActiveExercise? = nil) {
         self.weight = weight
         self.reps = reps
         self.unit = unit
