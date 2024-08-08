@@ -71,9 +71,7 @@ struct ProgressView: View {
                     Text("\(currentExercise.template.numOfSets) Sets")
                         .font(.headline)
                 }
-                Section("Sets") {
-                    AddSetView(template: activeWorkout.template, currentExercise: $currentExercise, exerciseSets: currentExercise.template.numOfSets, goToNextExercise: goToNextExercise)
-                }
+                AddSetView(currentExercise: $currentExercise, exerciseSets: currentExercise.template.numOfSets, goToNextExercise: goToNextExercise)
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
