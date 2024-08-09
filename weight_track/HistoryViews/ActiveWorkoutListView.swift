@@ -38,7 +38,7 @@ struct ActiveWorkoutListView: View {
         ForEach(activeWorkouts) { workout in
             if(workout.isComplete) {
                 NavigationLink {
-                    ActiveFullView()
+                    ActiveFullView(workout: workout)
                 } label: {
                     ActiveCardView(activeWorkout: workout)
                 }

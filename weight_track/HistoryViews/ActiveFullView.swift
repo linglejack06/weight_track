@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct ActiveFullView: View {
+    let workout: ActiveWorkout
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            Section {
+                Text("Completed on \(workout.date.formatted(.dateTime.day().month().year()))")
+            }
+            // add list of exercises with dropdown for set list
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                VStack {
+                    Text(workout.template.title)
+                    Text("Category: \(workout.template.category)")
+                        .font(.subheadline)
+                        .foregroundStyle(Color.secondary)
+                }
+            }
+        }
     }
 }
 
-#Preview {
-    ActiveFullView()
-}

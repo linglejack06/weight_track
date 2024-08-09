@@ -49,7 +49,6 @@ struct TemplateListView: View {
             Button("Delete active workouts") {delete ()}
             ForEach(workouts) { workout in
                 TemplateCardView(template: workout)
-                Text("\(workout.exercises.count)")
             }
             .onDelete(perform: deleteTemplate)
         } else {
