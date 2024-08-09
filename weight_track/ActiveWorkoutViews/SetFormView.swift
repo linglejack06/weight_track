@@ -60,21 +60,7 @@ struct SetFormView: View {
                         Button("Last Time's Sets", action: { presentPopover = true })
                             .font(.caption)
                             .popover(isPresented: $presentPopover, arrowEdge: .bottom) {
-                                ForEach(previousSets) { previousSet in
-                                    Button { useSuggestion(previousSet: previousSet) } label: {
-                                        HStack {
-                                            Image(systemName: "dumbbell")
-                                            Text(String(format: "%.2f", previousSet.weight) + " \(previousSet.unit.rawValue)")
-                                            Text("\(previousSet.reps) Reps")
-                                        }
-                                        .padding(.horizontal, 8)
-                                        .padding(.vertical, 2)
-                                        .foregroundStyle(Color.secondary)
-                                        .buttonStyle(BorderlessButtonStyle())
-                                    }
-                                }
-                                .padding(4)
-                                .presentationCompactAdaptation(.popover)
+                                PreviousSetListView(previousSets: previousSets, useSuggestion: useSuggestion)
                             }
                     }
                 }

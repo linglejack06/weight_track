@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C037B4B2C6692E600E3B9A0 /* PreviousSetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C037B4A2C6692E600E3B9A0 /* PreviousSetListView.swift */; };
 		5C173D412C63C746003752B0 /* SetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C173D402C63C746003752B0 /* SetRowView.swift */; };
 		5C1CE6F62C5D2E9A0005CE5B /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1CE6F52C5D2E9A0005CE5B /* ProgressView.swift */; };
 		5C1CE6F82C5D2FBC0005CE5B /* ExerciseRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1CE6F72C5D2FBC0005CE5B /* ExerciseRowView.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C037B4A2C6692E600E3B9A0 /* PreviousSetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousSetListView.swift; sourceTree = "<group>"; };
 		5C173D402C63C746003752B0 /* SetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRowView.swift; sourceTree = "<group>"; };
 		5C1CE6F52C5D2E9A0005CE5B /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		5C1CE6F72C5D2FBC0005CE5B /* ExerciseRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRowView.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				5C96F80A2C6273CA00C8985D /* AddSetView.swift */,
 				5C173D402C63C746003752B0 /* SetRowView.swift */,
 				5C72AA9C2C6542D800D9C08D /* SetFormView.swift */,
+				5C037B4A2C6692E600E3B9A0 /* PreviousSetListView.swift */,
 			);
 			path = ActiveWorkoutViews;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				5CEE25222C5804CC00302F61 /* TemplateCardView.swift in Sources */,
 				5C76B4F52C56F00100F147E3 /* Exercise.swift in Sources */,
 				5CEE25252C5804F400302F61 /* TemplateFullView.swift in Sources */,
+				5C037B4B2C6692E600E3B9A0 /* PreviousSetListView.swift in Sources */,
 				5C76B4F72C56F19D00F147E3 /* Workout.swift in Sources */,
 				5C96F80B2C6273CA00C8985D /* AddSetView.swift in Sources */,
 				5C24E7992C5AAA6E009B8437 /* AddExerciseTemplateView.swift in Sources */,
