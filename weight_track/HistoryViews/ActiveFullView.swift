@@ -6,15 +6,26 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ActiveFullView: View {
+    @Environment(\.modelContext) var modelContext
+    @Query private var exercises: [ActiveExercise]
     let workout: ActiveWorkout
     var body: some View {
         List {
             Section {
                 Text("Completed on \(workout.date.formatted(.dateTime.day().month().year()))")
             }
-            // add list of exercises with dropdown for set list
+            Section ("Exercises") {
+                ForEach(workout.exercises) { exercise in
+                    NavigationLink {
+                        ExerciseFullView(exercise: exercise, exercises: exercises)
+                    } label: {
+                        ExerciseRowView(exercise: exercise.template)
+                    }
+                }
+            }
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
