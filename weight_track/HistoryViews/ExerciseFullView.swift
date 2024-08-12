@@ -18,9 +18,10 @@ struct ExerciseFullView: View {
         self.exercise = exercise
         let exerciseTemplateName = exercise.template.name
         
-        var matchingExercises = exercises.filter({$0.template.name == exerciseTemplateName })
+        var matchingExercises = exercises.filter({$0.template.name == exerciseTemplateName && $0.sets.count > 0 })
         matchingExercises.append(exercise)
         self.completionTimes = matchingExercises.count
+        print(matchingExercises.count)
         var highestWeight = matchingExercises[0].sets[0]
         var highestRep = matchingExercises[0].sets[0]
         

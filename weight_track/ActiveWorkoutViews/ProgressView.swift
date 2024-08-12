@@ -62,6 +62,10 @@ struct ProgressView: View {
         dismiss()
     }
     
+    func addSetToExercise (_ set: Set) {
+        currentExercise.sets.append(set)
+    }
+    
     
     var body: some View {
         NavigationStack {
@@ -73,7 +77,7 @@ struct ProgressView: View {
                     Text("\(currentExercise.template.numOfSets) Sets")
                         .font(.headline)
                 }
-                AddSetView(currentExercise: $currentExercise, exerciseSets: currentExercise.template.numOfSets, goToNextExercise: goToNextExercise)
+                AddSetView(currentExercise: $currentExercise, exerciseSets: currentExercise.template.numOfSets, goToNextExercise: goToNextExercise, addSetToExercise: addSetToExercise)
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

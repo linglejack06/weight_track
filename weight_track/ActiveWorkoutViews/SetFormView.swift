@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct SetFormView: View {
+    @Environment(\.modelContext) private var modelContext
     @Query private var previousWorkouts: [ActiveWorkout]
     @State private var weightType: WeightType = .pounds
     @State private var weight: Double = 0.0
@@ -18,9 +19,12 @@ struct SetFormView: View {
     @Binding var currentExercise: ActiveExercise
     let exerciseSets: Int
     let goToNextExercise: () -> Void
+    let addSetToExercise: (Set) -> Void
     
     func addSet () {
-        currentExercise.sets.append(Set(weight: self.weight, reps: self.reps, unit: self.weightType))
+        let newSet = Set(weight: self.weight, reps: self.reps, unit: self.weightType, exercise: currentExercise)
+        modelContext.insert(newSet)
+        addSetToExercise(newSet)
         weight = 0.0
         reps = 0
         

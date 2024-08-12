@@ -22,6 +22,7 @@ struct AddSetView: View {
     @Binding var currentExercise: ActiveExercise
     var exerciseSets: Int
     var goToNextExercise: () -> Void
+    var addSetToExercise: (Set) -> Void
     
     func deleteSet(_ indexSet: IndexSet) {
         currentExercise.sets.remove(atOffsets: indexSet)
@@ -78,7 +79,7 @@ struct AddSetView: View {
                 .onMove(perform: moveSet)
             }
             if(currentExercise.sets.count < exerciseSets) {
-                SetFormView(currentExercise: $currentExercise, exerciseSets: exerciseSets, goToNextExercise: goToNextExercise)
+                SetFormView(currentExercise: $currentExercise, exerciseSets: exerciseSets, goToNextExercise: goToNextExercise, addSetToExercise: addSetToExercise)
             }
         }
     }

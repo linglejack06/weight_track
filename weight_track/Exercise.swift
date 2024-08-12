@@ -43,9 +43,9 @@ class ExerciseTemplate {
 
 @Model
 class ActiveExercise {
-    var sets: [Set]
+    @Relationship(deleteRule: .cascade) var sets: [Set]
     var template: ExerciseTemplate
-    var workout: ActiveWorkout?
+    @Relationship(inverse: \ActiveWorkout.exercises) var workout: ActiveWorkout?
     var date: Date
     
     init(template: ExerciseTemplate = ExerciseTemplate(), sets: [Set] = [], workout: ActiveWorkout? = nil, date: Date = .now) {
