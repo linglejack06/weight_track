@@ -10,21 +10,16 @@ import SwiftData
 
 struct ActiveFullView: View {
     @Environment(\.modelContext) var modelContext
-    @Query private var exercises: [ActiveExercise]
     let workout: ActiveWorkout
+    
+
     var body: some View {
         List {
             Section {
-                Text("Completed on \(workout.date.formatted(.dateTime.day().month().year()))")
+                Text("Completed: \(workout.date.formatted(.dateTime.day().month().year())) at \(workout.date.formatted(date: .omitted,time: .shortened))")
             }
-            Section ("Exercises") {
-                ForEach(workout.exercises) { exercise in
-                    NavigationLink {
-                        ExerciseFullView(exercise: exercise, exercises: exercises)
-                    } label: {
-                        ExerciseRowView(exercise: exercise.template)
-                    }
-                }
+            ForEach(workout.exercises) { exercise in
+                ExerciseFullView(exercise: exercise)
             }
         }
         .toolbar {
