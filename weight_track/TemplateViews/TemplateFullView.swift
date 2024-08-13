@@ -20,6 +20,21 @@ struct TemplateFullView: View {
         return count
     }
     
+    var completionTimes: Int {
+        var count = 0
+        for workout in activeWorkouts {
+            if workout.template == template {
+                count += 1
+            }
+        }
+        return count
+    }
+    
+    var mostRecentCompletion: Date? {
+        var sortedWorkouts = activeWorkouts.sorted(by: { $0.date > $1.date })
+        return activeWorkouts.filter({$0.template == template}).first?.date
+    }
+    
     @State private var presentProgress = false
     @State private var hasStartError = false
     
@@ -47,8 +62,10 @@ struct TemplateFullView: View {
                     }
                     Spacer()
                     VStack (alignment: .leading) {
-                        Text("Completed Workouts")
-                        Text("Most Recent Completion")
+                        Text("Completions: \(completionTimes)")
+                            .font(.headline)
+                        Text("Most Recent: \(mostRecentCompletion?.formatted(date: .numeric, time: .omitted) ?? "None")")
+                            .font(.headline)
                     }
                 }
             }
