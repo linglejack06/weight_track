@@ -11,34 +11,24 @@ import SwiftData
 struct ProgressView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @State private var activeWorkout: ActiveWorkout
-    @State private var currentExercise: ActiveExercise
+    @Binding private var activeWorkout: ActiveWorkout
+    @Binding private var currentExercise: ActiveExercise
     
-    init (template: WorkoutTemplate = WorkoutTemplate(), context: ModelContext) {
-        activeWorkout = ActiveWorkout(template: template)
-        currentExercise = ActiveExercise(template: template.exercises[0])
-        
-        context.insert(activeWorkout)
-        context.insert(currentExercise)
-        
-        currentExercise.workout = activeWorkout
-    }
-    
-    init(activeWorkout: ActiveWorkout, context: ModelContext) {
-        self.activeWorkout = activeWorkout
-        // fast forward to first exercise not completed
-        let possibleExercise = activeWorkout.exercises.last
-        if(possibleExercise != nil && (possibleExercise!.sets.count) != possibleExercise!.template.numOfSets) {
-            currentExercise = possibleExercise!
-        } else if activeWorkout.exercises.count < activeWorkout.template.exercises.count {
-            let nextExercise = activeWorkout.template.exercises[activeWorkout.exercises.count]
-            currentExercise = ActiveExercise(template: nextExercise)
-            context.insert(currentExercise)
-            currentExercise.workout = self.activeWorkout
-        } else {
-            currentExercise = activeWorkout.exercises.last!
-        }
-    }
+//    init(activeWorkout: ActiveWorkout, context: ModelContext) {
+//        self.activeWorkout = activeWorkout
+//        // fast forward to first exercise not completed
+//        let possibleExercise = activeWorkout.exercises.last
+//        if(possibleExercise != nil && (possibleExercise!.sets.count) != possibleExercise!.template.numOfSets) {
+//            currentExercise = possibleExercise!
+//        } else if activeWorkout.exercises.count < activeWorkout.template.exercises.count {
+//            let nextExercise = activeWorkout.template.exercises[activeWorkout.exercises.count]
+//            currentExercise = ActiveExercise(template: nextExercise)
+//            context.insert(currentExercise)
+//            currentExercise.workout = self.activeWorkout
+//        } else {
+//            currentExercise = activeWorkout.exercises.last!
+//        }
+//    }
     
     func goToNextExercise () {
         if(activeWorkout.template.exercises.count == activeWorkout.exercises.count) {

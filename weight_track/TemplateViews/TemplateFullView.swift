@@ -33,6 +33,7 @@ struct TemplateFullView: View {
     
     @State private var presentProgress = false
     @State private var hasStartError = false
+    @State private var activeWorkout: ActiveWorkout? = nil
     
     func updatePresentProgress () {
         for workout in activeWorkouts {
@@ -43,6 +44,11 @@ struct TemplateFullView: View {
             }
         }
         
+        activeWorkout = ActiveWorkout(template: template)
+        let currentExercise = ActiveExercise(template: template.exercises[0])
+        modelContext.insert(activeWorkout!)
+        modelContext.insert(currentExercise)
+        activeWorkout!.exercises.append(currentExercise)
         presentProgress = true
     }
     
@@ -87,7 +93,7 @@ struct TemplateFullView: View {
             }
         }
         .fullScreenCover(isPresented: $presentProgress) {
-            ProgressView(template: template, context: modelContext)
+            ProgressView(activeWorkout: activeWorkout)
         }
         .alert("Error", isPresented: $hasStartError) {
             Button("OK") {}
