@@ -47,7 +47,7 @@ struct HomeView: View {
                                 Button("Cancel", action: { isPresented.toggle() })
                             }
                         }
-                        .navigationTitle("New Workout Template")
+                        .navigationTitle("New Template")
                 }
             }
         }

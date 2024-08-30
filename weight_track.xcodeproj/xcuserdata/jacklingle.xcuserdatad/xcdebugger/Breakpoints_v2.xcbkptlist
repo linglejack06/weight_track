@@ -3,4 +3,68 @@
    uuid = "66E8E57A-4EB2-49ED-A0CD-A5B9C36E8DDC"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DCAD6A1D-2578-4397-B97E-63BACD7F0A37"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "weight_track/ActiveWorkoutViews/ProgressView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "init(template:context:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DCAD6A1D-2578-4397-B97E-63BACD7F0A37 - ca2a744c9aa99bf9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 0 of weight_track.ProgressView.init(template: weight_track.WorkoutTemplate, context: SwiftData.ModelContext) -&gt; weight_track.ProgressView"
+                  moduleName = "weight_track"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jacklingle/repos/weight_track/weight_track/ActiveWorkoutViews/ProgressView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17">
+               </Location>
+               <Location
+                  uuid = "DCAD6A1D-2578-4397-B97E-63BACD7F0A37 - f2bc258225f43505"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "weight_track.ProgressView.init(template: weight_track.WorkoutTemplate, context: SwiftData.ModelContext) -&gt; weight_track.ProgressView"
+                  moduleName = "weight_track"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jacklingle/repos/weight_track/weight_track/ActiveWorkoutViews/ProgressView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "00D97677-9E10-4C0C-B8E8-BFF06210A437"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "weight_track/TemplateViews/TemplateFullView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
