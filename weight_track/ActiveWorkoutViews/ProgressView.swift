@@ -11,13 +11,24 @@ import SwiftData
 struct ProgressView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @Binding private var activeWorkout: ActiveWorkout
-    @Binding private var currentExercise: ActiveExercise
-    let goToNextExercise: () -> Void
+    @State var activeWorkout: ActiveWorkout
+    @State var currentExercise: ActiveExercise
     
     func cancelWorkout () {
         modelContext.delete(activeWorkout)
         dismiss()
+    }
+    
+    func goToNextExercise () {
+        if(activeWorkout.template.exercises.count == activeWorkout.exercises.count) {
+            finishWorkout()
+            return
+        }
+        let nextExercise = activeWorkout.template.exercises[activeWorkout.exercises.count]
+        currentExercise = ActiveExercise(template: nextExercise)
+        
+        modelContext.insert(currentExercise)
+        activeWorkout.exercises.append(currentExercise)
     }
     
     func finishWorkout () {

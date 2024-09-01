@@ -113,7 +113,7 @@ struct TemplateFullView: View {
             }
         }
         .fullScreenCover(isPresented: $presentProgress) {
-            ProgressView(activeWorkout: $activeWorkout, currentExercise: $currentExercise, goToNextExercise: goToNextExercise)
+            ProgressView(activeWorkout: activeWorkout, currentExercise: currentExercise)
         }
         .alert("Error", isPresented: $hasStartError) {
             Button("OK") {}

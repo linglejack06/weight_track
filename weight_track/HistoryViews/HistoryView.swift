@@ -52,8 +52,8 @@ struct HistoryView: View {
                 }
             }
             .fullScreenCover(isPresented: $presentProgress) {
-                if (activeWorkout != nil) {
-                    ProgressView(activeWorkout: $activeWorkout?, currentExercise: $activeWorkout?.exercises.last?)
+                if let unwrappedWorkout = activeWorkout {
+                    ProgressView(activeWorkout: unwrappedWorkout, currentExercise: unwrappedWorkout.exercises.last!)
                 }
             }
             .searchable(text: $searchBy)
