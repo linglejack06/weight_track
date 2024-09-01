@@ -15,19 +15,7 @@ struct HistoryView: View {
     @State private var sortedCategory: WorkoutCategoryWithAll = .all
     @State private var searchBy = ""
     
-    var activeWorkout: ActiveWorkout? {
-        get {
-            for workout in workouts {
-                if Calendar.current.isDateInToday(workout.date) && !workout.isComplete {
-                    return workout
-                }
-            }
-            return nil
-        }
-        set(newWorkout) {
-            
-        }
-    }
+    @State var activeWorkout: ActiveWorkout?
     
     func deleteActiveWorkout () {
         modelContext.delete(activeWorkout!)
@@ -65,7 +53,7 @@ struct HistoryView: View {
             }
             .fullScreenCover(isPresented: $presentProgress) {
                 if (activeWorkout != nil) {
-                    ProgressView(activeWorkout: self.activeWorkout!, context: modelContext)
+                    ProgressView(activeWorkout: $activeWorkout?, currentExercise: $activeWorkout?.exercises.last?)
                 }
             }
             .searchable(text: $searchBy)
