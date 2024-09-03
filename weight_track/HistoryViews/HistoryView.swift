@@ -15,7 +15,15 @@ struct HistoryView: View {
     @State private var sortedCategory: WorkoutCategoryWithAll = .all
     @State private var searchBy = ""
     
-    @State var activeWorkout: ActiveWorkout?
+    @State var activeWorkout: ActiveWorkout? = nil
+    
+    func checkForWorkout () {
+        for workout in workouts {
+            if Calendar.current.isDateInToday(workout.date) && !workout.isComplete {
+                activeWorkout = workout
+            }
+        }
+    }
     
     func deleteActiveWorkout () {
         modelContext.delete(activeWorkout!)
@@ -57,6 +65,9 @@ struct HistoryView: View {
                 }
             }
             .searchable(text: $searchBy)
+            .onAppear(perform: {
+                checkForWorkout()
+            })
         }
     }
 }
