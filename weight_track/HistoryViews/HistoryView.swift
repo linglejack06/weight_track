@@ -36,6 +36,7 @@ struct HistoryView: View {
                     Section("Incomplete Workout") {
                         VStack {
                             ActiveCardView(activeWorkout: activeWorkout!)
+                            Divider()
                             HStack {
                                 Button("Delete", action: deleteActiveWorkout )
                                     .buttonStyle(BorderlessButtonStyle())

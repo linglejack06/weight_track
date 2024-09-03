@@ -12,8 +12,8 @@ struct SetFormView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var previousWorkouts: [ActiveWorkout]
     @State private var weightType: WeightType = .pounds
-    @State private var weight: Double = 0.0
-    @State private var reps: Int = 0
+    @State private var weight: Double? = nil
+    @State private var reps: Int? = nil
     @State private var presentPopover = false
     @State private var previousSets: [Set] = []
     @Binding var currentExercise: ActiveExercise
@@ -22,11 +22,11 @@ struct SetFormView: View {
     let addSetToExercise: (Set) -> Void
     
     func addSet () {
-        let newSet = Set(weight: self.weight, reps: self.reps, unit: self.weightType, exercise: currentExercise)
+        let newSet = Set(weight: self.weight ?? 0, reps: self.reps!, unit: self.weightType, exercise: currentExercise)
         modelContext.insert(newSet)
         addSetToExercise(newSet)
-        weight = 0.0
-        reps = 0
+        weight = nil
+        reps = nil
         
         if(currentExercise.sets.count == exerciseSets) {
             goToNextExercise()
@@ -73,12 +73,8 @@ struct SetFormView: View {
                         .keyboardType(.decimalPad)
                     TextField("Reps", value: $reps, format: .number)
                         .keyboardType(.numberPad)
-                }
-                HStack {
-                    Spacer()
                     Button("Add Set", action: addSet)
-                        .disabled(reps == 0)
-                    Spacer()
+                        .disabled(reps == 0 || reps == nil)
                 }
             }
         }
