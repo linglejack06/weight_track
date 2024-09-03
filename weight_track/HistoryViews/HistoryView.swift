@@ -27,6 +27,7 @@ struct HistoryView: View {
     
     func deleteActiveWorkout () {
         modelContext.delete(activeWorkout!)
+        activeWorkout = nil
     }
     
     var body: some View {
@@ -38,7 +39,9 @@ struct HistoryView: View {
                             ActiveCardView(activeWorkout: activeWorkout!)
                             Divider()
                             HStack {
-                                Button("Delete", action: deleteActiveWorkout )
+                                Button(role: .destructive, action: deleteActiveWorkout) {
+                                    Text("Delete")
+                                }
                                     .buttonStyle(BorderlessButtonStyle())
                                 Spacer()
                                 Button("Continue", action: { presentProgress = true })
