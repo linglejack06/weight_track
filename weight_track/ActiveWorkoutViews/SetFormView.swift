@@ -68,6 +68,7 @@ struct SetFormView: View {
                             }
                     }
                 }
+                Spacer()
                 HStack {
                     TextField("Weight", value: $weight, format: .number)
                         .keyboardType(.decimalPad)
@@ -76,6 +77,8 @@ struct SetFormView: View {
                     Button("Add Set", action: addSet)
                         .disabled(reps == 0 || reps == nil)
                 }
+                Spacer()
+                Spacer()
             }
         }
         .onAppear(perform: {

@@ -13,9 +13,11 @@ struct ProgressView: View {
     @Environment(\.dismiss) private var dismiss
     @State var activeWorkout: ActiveWorkout
     @State var currentExercise: ActiveExercise
+    var refreshPage = { }
     
     func cancelWorkout () {
         modelContext.delete(activeWorkout)
+        refreshPage()
         dismiss()
     }
     
@@ -33,6 +35,7 @@ struct ProgressView: View {
     
     func finishWorkout () {
         activeWorkout.isComplete = true
+        refreshPage()
         dismiss()
     }
     

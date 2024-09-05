@@ -20,15 +20,15 @@ struct TemplateFullView: View {
         return count
     }
     
-    var completionTimes: Int = 0
-//        var count = 0
-//        for workout in activeWorkouts {
-//            if workout.template == template {
-//                count += 1
-//            }
-//        }
-//        return count
-//    }
+    var completionTimes: Int {
+        var count = 0
+        for workout in activeWorkouts {
+            if workout.template == template && workout.isComplete {
+                count += 1
+            }
+        }
+        return count
+    }
     
     
     @State private var presentProgress = false
@@ -83,7 +83,6 @@ struct TemplateFullView: View {
                             .font(.headline)
                     }
                     Spacer()
-                    Text("\(activeWorkouts.count)")
                     VStack (alignment: .leading) {
                         Text("Completions: \(completionTimes)")
                             .font(.headline)

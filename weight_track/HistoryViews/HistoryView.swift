@@ -44,7 +44,9 @@ struct HistoryView: View {
                                 }
                                     .buttonStyle(BorderlessButtonStyle())
                                 Spacer()
-                                Button("Continue", action: { presentProgress = true })
+                                Button("Continue", action: {
+                                    presentProgress = true
+                                })
                                     .buttonStyle(BorderlessButtonStyle())
                             }
                         }
@@ -65,7 +67,7 @@ struct HistoryView: View {
             }
             .fullScreenCover(isPresented: $presentProgress) {
                 if let unwrappedWorkout = activeWorkout {
-                    ProgressView(activeWorkout: unwrappedWorkout, currentExercise: unwrappedWorkout.exercises.last!)
+                    ProgressView(activeWorkout: unwrappedWorkout, currentExercise: unwrappedWorkout.exercises.last!, refreshPage: { activeWorkout = nil })
                 }
             }
             .searchable(text: $searchBy)
