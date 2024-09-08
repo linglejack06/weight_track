@@ -15,6 +15,8 @@ struct AddExerciseTemplateView: View {
     @State private var numOfSets: Int? = nil
     @State private var exerciseSuggestions = [ExerciseTemplate]()
     @State private var presentPopover = false
+    @State private var isNameEmpty = true
+    @State private var isSetsNil = true
     @Binding var exercises: [ExerciseTemplate]
     
     func addExercise () {
@@ -66,34 +68,42 @@ struct AddExerciseTemplateView: View {
             .onDelete(perform: deleteExercise)
             .onMove(perform: moveExercise)
         }
-        HStack {
-            TextField("Name", text: $exerciseName)
-                .containerRelativeFrame(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/, count: 2, span: 1, spacing: 0)
-                .onChange(of: exerciseName){ oldValue, newValue in
-                    findExerciseSuggestions(for: newValue)
-                }
-                .popover(isPresented: $presentPopover, arrowEdge: .bottom) {
-                    VStack(alignment: .leading) {
-                        ForEach(exerciseSuggestions) { exercise in
-                            Button {
-                                useSuggestion(exercise)
-                            } label: {
-                                HStack {
-                                    Image(systemName: "dumbbell")
-                                    Text(exercise.name)
-                                    Text("\(exercise.numOfSets) sets")
-                                }
-                            }
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 2)
-                            .foregroundStyle(Color.secondary)
-                        }
+        HStack (alignment: .center){
+            LabelledTextInput(title: "Name", isNil: $isNameEmpty) {
+                TextField("Name", text: $exerciseName)
+                    .onChange(of: exerciseName){ oldValue, newValue in
+                        findExerciseSuggestions(for: newValue)
+                        isNameEmpty = newValue.isEmpty
                     }
-                    .padding(4)
-                    .presentationCompactAdaptation(.popover)
-                }
-            TextField("Sets", value: $numOfSets, format: .number)
-                .keyboardType(.numberPad)
+                    .popover(isPresented: $presentPopover, arrowEdge: .bottom) {
+                        VStack(alignment: .leading) {
+                            ForEach(exerciseSuggestions) { exercise in
+                                Button {
+                                    useSuggestion(exercise)
+                                } label: {
+                                    HStack {
+                                        Image(systemName: "dumbbell")
+                                        Text(exercise.name)
+                                        Text("\(exercise.numOfSets) sets")
+                                    }
+                                }
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 2)
+                                .foregroundStyle(Color.secondary)
+                            }
+                        }
+                        .padding(4)
+                        .presentationCompactAdaptation(.popover)
+                    }
+            }
+            .containerRelativeFrame(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/, count: 2, span: 1, spacing: 0)
+            LabelledTextInput(title: "Sets", isNil: $isSetsNil) {
+                TextField("Sets", value: $numOfSets, format: .number)
+                    .keyboardType(.numberPad)
+                    .onChange(of: numOfSets) { oldValue, newValue in
+                        isSetsNil = (newValue==nil)
+                    }
+            }
             Button(action: addExercise) {
                 Image(systemName: "plus")
             }

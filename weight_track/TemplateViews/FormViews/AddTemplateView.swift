@@ -17,6 +17,7 @@ struct AddTemplateView: View {
     @State private var category: WorkoutCategory = .push
     @State private var exercises: [ExerciseTemplate] = []
     @State private var hasError = false
+    @State private var isTitleEmpty = true
     
     func addWorkout () {
         if workouts.contains(where: { $0.title == title }) {
@@ -54,7 +55,12 @@ struct AddTemplateView: View {
     
     var body: some View {
         Form {
-            TextField("Title", text: $title)
+            LabelledTextInput(title: "Title", isNil: $isTitleEmpty) {
+                TextField("", text: $title)
+                    .onChange(of: title) { oldValue, newValue in
+                        isTitleEmpty = newValue.isEmpty
+                    }
+            }
             Picker("Choose Type of Workout", selection: $category) {
                 ForEach(WorkoutCategory.allCases, id: \.self) { cat in
                     Text("\(cat.rawValue)")
