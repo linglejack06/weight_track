@@ -18,12 +18,14 @@ class Set {
     var weight: Double
     var reps: Int
     var unit: WeightType
+    var timeUntilNextSet: Double
     @Relationship(inverse: \ActiveExercise.sets) var exercise: ActiveExercise?
     
-    init(weight: Double = 0.0, reps: Int = 0, unit: WeightType = .pounds, exercise: ActiveExercise? = nil) {
+    init(weight: Double = 0.0, reps: Int = 0, unit: WeightType = .pounds, timeUntilNextSet: Double = 0.0, exercise: ActiveExercise? = nil) {
         self.weight = weight
         self.reps = reps
         self.unit = unit
+        self.timeUntilNextSet = timeUntilNextSet
         self.exercise = exercise
     }
 }
