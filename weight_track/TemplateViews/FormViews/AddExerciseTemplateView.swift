@@ -13,10 +13,14 @@ struct AddExerciseTemplateView: View {
     @Query private var existingExercises: [ExerciseTemplate]
     @State private var exerciseName = ""
     @State private var numOfSets: Int? = nil
+    @State private var minutes: Int? = nil
+    @State private var seconds: Int? = nil
     @State private var exerciseSuggestions = [ExerciseTemplate]()
     @State private var presentPopover = false
     @State private var isNameEmpty = true
     @State private var isSetsNil = true
+    @State private var isMinutesNil = true
+    @State private var isSecondsNil = true
     @Binding var exercises: [ExerciseTemplate]
     
     func addExercise () {
@@ -68,45 +72,70 @@ struct AddExerciseTemplateView: View {
             .onDelete(perform: deleteExercise)
             .onMove(perform: moveExercise)
         }
-        HStack (alignment: .center){
-            LabelledTextInput(title: "Name", isNil: $isNameEmpty) {
-                TextField("Name", text: $exerciseName)
-                    .onChange(of: exerciseName){ oldValue, newValue in
-                        findExerciseSuggestions(for: newValue)
-                        isNameEmpty = newValue.isEmpty
-                    }
-                    .popover(isPresented: $presentPopover, arrowEdge: .bottom) {
-                        VStack(alignment: .leading) {
-                            ForEach(exerciseSuggestions) { exercise in
-                                Button {
-                                    useSuggestion(exercise)
-                                } label: {
-                                    HStack {
-                                        Image(systemName: "dumbbell")
-                                        Text(exercise.name)
-                                        Text("\(exercise.numOfSets) sets")
-                                    }
-                                }
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 2)
-                                .foregroundStyle(Color.secondary)
-                            }
+        VStack (alignment: .center) {
+            HStack (alignment: .center){
+                LabelledTextInput(title: "Name", isNil: $isNameEmpty) {
+                    TextField("", text: $exerciseName)
+                        .onChange(of: exerciseName){ oldValue, newValue in
+                            findExerciseSuggestions(for: newValue)
+                            isNameEmpty = newValue.isEmpty
                         }
-                        .padding(4)
-                        .presentationCompactAdaptation(.popover)
-                    }
+                        .popover(isPresented: $presentPopover, arrowEdge: .bottom) {
+                            VStack(alignment: .leading) {
+                                ForEach(exerciseSuggestions) { exercise in
+                                    Button {
+                                        useSuggestion(exercise)
+                                    } label: {
+                                        HStack {
+                                            Image(systemName: "dumbbell")
+                                            Text(exercise.name)
+                                            Text("\(exercise.numOfSets) sets")
+                                        }
+                                    }
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 2)
+                                    .foregroundStyle(Color.secondary)
+                                }
+                            }
+                            .padding(4)
+                            .presentationCompactAdaptation(.popover)
+                        }
+                }
+                .containerRelativeFrame(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/, count: 2, span: 1, spacing: 0)
+                LabelledTextInput(title: "Sets", isNil: $isSetsNil) {
+                    TextField("", value: $numOfSets, format: .number)
+                        .keyboardType(.numberPad)
+                        .onChange(of: numOfSets) { oldValue, newValue in
+                            isSetsNil = (newValue==nil)
+                        }
+                }
             }
-            .containerRelativeFrame(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/, count: 2, span: 1, spacing: 0)
-            LabelledTextInput(title: "Sets", isNil: $isSetsNil) {
-                TextField("Sets", value: $numOfSets, format: .number)
-                    .keyboardType(.numberPad)
-                    .onChange(of: numOfSets) { oldValue, newValue in
-                        isSetsNil = (newValue==nil)
+            .padding(.bottom, 8)
+            VStack (alignment: .leading, spacing: 0) {
+                Text("Rest Between Sets")
+                    .font(.caption)
+                HStack {
+                    LabelledTextInput(title: "Minutes", isNil: $isMinutesNil) {
+                        TextField("", value: $minutes, format: .number)
+                            .keyboardType(.numberPad)
+                            .onChange(of: minutes) { oldValue, newValue in
+                                isMinutesNil = (newValue==nil)
+                            }
                     }
+                    LabelledTextInput(title: "Seconds", isNil: $isSecondsNil) {
+                        TextField("", value: $seconds, format: .number)
+                            .keyboardType(.numberPad)
+                            .onChange(of: seconds) { oldValue, newValue in
+                                isSecondsNil = (newValue==nil)
+                            }
+                    }
+                }
             }
+            .padding(.bottom, 8)
             Button(action: addExercise) {
-                Image(systemName: "plus")
+                Text("Add Exercise")
             }
+            .buttonStyle(BorderedProminentButtonStyle())
             .disabled(exerciseName == "" || numOfSets == nil || numOfSets == 0)
         }
     }
