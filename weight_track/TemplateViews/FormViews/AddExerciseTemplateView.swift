@@ -24,7 +24,11 @@ struct AddExerciseTemplateView: View {
     @Binding var exercises: [ExerciseTemplate]
     
     func addExercise () {
-        let exerciseToAdd = ExerciseTemplate(numOfSets: numOfSets!, name: exerciseName)
+        let minutesUnwrapped = Double(minutes ?? 0)
+        let secondsUnwrapped = Double(seconds ?? 0)
+        let restBetweenSets: Double = minutesUnwrapped * 60.0 + secondsUnwrapped
+        
+        let exerciseToAdd = ExerciseTemplate(numOfSets: numOfSets!, name: exerciseName, restBetweenSets: restBetweenSets)
 
         withAnimation {
             exercises.append(exerciseToAdd)
@@ -62,6 +66,8 @@ struct AddExerciseTemplateView: View {
     func useSuggestion(_ exercise: ExerciseTemplate) {
         exerciseName = exercise.name
         numOfSets = exercise.numOfSets
+        minutes = Int(exercise.restBetweenSets / 60)
+        seconds = Int(exercise.restBetweenSets.truncatingRemainder(dividingBy: 60))
         presentPopover = false
     }
     var body: some View {
@@ -136,7 +142,7 @@ struct AddExerciseTemplateView: View {
                 Text("Add Exercise")
             }
             .buttonStyle(BorderedProminentButtonStyle())
-            .disabled(exerciseName == "" || numOfSets == nil || numOfSets == 0)
+            .disabled(exerciseName == "" || numOfSets == nil || numOfSets == 0 || (minutes == nil && seconds == nil))
         }
     }
 }
