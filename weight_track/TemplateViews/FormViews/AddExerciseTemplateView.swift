@@ -35,6 +35,8 @@ struct AddExerciseTemplateView: View {
         }
         exerciseName = ""
         numOfSets = nil
+        minutes = nil
+        seconds = nil
     }
     
     func deleteExercise (_ indexSet: IndexSet) {

@@ -36,7 +36,7 @@ struct LabelledTextInput<Content>: View where Content: View{
     var body: some View {
             ZStack(alignment: .leading) {
                 Text(title)
-                    .foregroundStyle(isNil ? Color(.placeholderText) : .accentColor)
+                    .foregroundStyle(isNil ? .gray : .accentColor)
                     .offset(y: offsetEffect)
                     .scaleEffect(scaleEffect, anchor: .leading)
                     .onChange(of: isNil) { oldValue, newValue in

@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct TemplateFullView: View {
-    @Environment (\.modelContext) var modelContext
+    @Environment(\.modelContext) var modelContext
     @Query private var activeWorkouts: [ActiveWorkout]
     let template: WorkoutTemplate
     var setCount: Int {
