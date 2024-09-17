@@ -29,6 +29,7 @@
 		5CB8AC622C8CA1680025DA26 /* LabelledTextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8AC612C8CA1680025DA26 /* LabelledTextInput.swift */; };
 		5CCA4ACD2C6025CA00CDA364 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCA4ACC2C6025CA00CDA364 /* HistoryView.swift */; };
 		5CD4858F2C9A2965009D9361 /* CountdownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD4858E2C9A2965009D9361 /* CountdownTimer.swift */; };
+		5CD485912C9A2D48009D9361 /* RestTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD485902C9A2D48009D9361 /* RestTimer.swift */; };
 		5CEAB3622C6132EC00260B95 /* ActiveWorkoutListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEAB3612C6132EC00260B95 /* ActiveWorkoutListView.swift */; };
 		5CEAB3642C6133BD00260B95 /* ActiveCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEAB3632C6133BD00260B95 /* ActiveCardView.swift */; };
 		5CEE25202C5800ED00302F61 /* TemplateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEE251F2C5800ED00302F61 /* TemplateListView.swift */; };
@@ -81,6 +82,7 @@
 		5CB8AC612C8CA1680025DA26 /* LabelledTextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelledTextInput.swift; sourceTree = "<group>"; };
 		5CCA4ACC2C6025CA00CDA364 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		5CD4858E2C9A2965009D9361 /* CountdownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimer.swift; sourceTree = "<group>"; };
+		5CD485902C9A2D48009D9361 /* RestTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestTimer.swift; sourceTree = "<group>"; };
 		5CEAB3612C6132EC00260B95 /* ActiveWorkoutListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveWorkoutListView.swift; sourceTree = "<group>"; };
 		5CEAB3632C6133BD00260B95 /* ActiveCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCardView.swift; sourceTree = "<group>"; };
 		5CEE251F2C5800ED00302F61 /* TemplateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateListView.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				5C76B4F42C56F00100F147E3 /* Exercise.swift */,
 				5C76B4F62C56F19D00F147E3 /* Workout.swift */,
 				5C1DBE332C5C33F700B28D02 /* HomeView.swift */,
+				5CD485902C9A2D48009D9361 /* RestTimer.swift */,
 			);
 			path = weight_track;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				5C124C9D2C6A6D180045F43F /* ExerciseFullView.swift in Sources */,
 				5C173D412C63C746003752B0 /* SetRowView.swift in Sources */,
 				5C1CE6F82C5D2FBC0005CE5B /* ExerciseRowView.swift in Sources */,
+				5CD485912C9A2D48009D9361 /* RestTimer.swift in Sources */,
 				5CCA4ACD2C6025CA00CDA364 /* HistoryView.swift in Sources */,
 				5C1DBE342C5C33F700B28D02 /* HomeView.swift in Sources */,
 				5CEE25222C5804CC00302F61 /* TemplateCardView.swift in Sources */,

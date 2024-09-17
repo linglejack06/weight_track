@@ -54,7 +54,7 @@ struct ProgressView: View {
                     Text("\(currentExercise.template.numOfSets) Sets")
                         .font(.headline)
                 }
-                CountdownTimer(duration: currentExercise.template.restBetweenSets)
+                CountdownTimer(desiredDuration: currentExercise.template.restBetweenSets)
                 AddSetView(currentExercise: $currentExercise, exerciseSets: currentExercise.template.numOfSets, goToNextExercise: goToNextExercise, addSetToExercise: addSetToExercise)
             }
             .toolbar {

@@ -16,31 +16,44 @@ struct CountdownTimer: View {
         return formatter
     }()
     
-    @State var timeRemaining: String
-    var desiredDuration: Date
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    var desiredDuration: Double
+    @StateObject var timer: RestTimer
+    var notificationDate: Date = Date()
     
-    public init(duration: Double) {
-        desiredDuration = Calendar.current.date(byAdding: .second, value: Int(duration), to: Date())!
-        self._timeRemaining = .init(initialValue: CountdownTimer.durationFormatter.string(from: desiredDuration.timeIntervalSince(Date())) ?? "----")
+    init(desiredDuration: Double) {
+        self.desiredDuration = desiredDuration
+        self._timer = .init(wrappedValue: RestTimer(duration: desiredDuration))
     }
+    
+    
     var body: some View {
         VStack {
             HStack(spacing: 12) {
                 Spacer()
-                Text(timeRemaining)
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundStyle(Color.red)
+                if(Int(timer.secondsRemaining / 60) > 0) {
+                    if(Int(timer.secondsRemaining.truncatingRemainder(dividingBy: 60)) > 0) {
+                        Text("Rest: \(Int(timer.secondsRemaining / 60))m \(Int(timer.secondsRemaining.truncatingRemainder(dividingBy: 60)))s")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundStyle(.red)
+                    } else {
+                        Text("Rest: \(Int(timer.secondsRemaining / 60))m")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundStyle(.red)
+                    }
+                } else if (Int(timer.secondsRemaining.truncatingRemainder(dividingBy: 60)) > 0) {
+                    Text("Rest: \(Int(timer.secondsRemaining.truncatingRemainder(dividingBy: 60)))s")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundStyle(.red)
+                } else {
+                    Text("Rest: none")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundStyle(.red)
+                }
                 Spacer()
             }
         }
-        .onReceive(timer) { _ in
-            var delta = desiredDuration.timeIntervalSince(Date())
-            if delta <= 0 {
-                delta = 0
-                timer.upstream.connect().cancel()
-            }
-            timeRemaining = CountdownTimer.durationFormatter.string(from: delta) ?? "----"
+        .onAppear() {
+            timer.start()
         }
     }
 }
