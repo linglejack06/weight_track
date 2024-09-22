@@ -33,8 +33,8 @@ struct TemplateFullView: View {
     
     @State private var presentProgress = false
     @State private var hasStartError = false
-    @State private var activeWorkout: ActiveWorkout = ActiveWorkout()
-    @State private var currentExercise: ActiveExercise = ActiveExercise()
+    @State private var activeWorkout: ActiveWorkout? = nil
+    @State private var currentExercise: ActiveExercise? = nil
     
     func updatePresentProgress () {
         for workout in activeWorkouts {
@@ -48,28 +48,17 @@ struct TemplateFullView: View {
         activeWorkout = ActiveWorkout(template: template)
         currentExercise = ActiveExercise(template: template.exercises[0])
         
-        modelContext.insert(activeWorkout)
-        modelContext.insert(currentExercise)
-        
-        activeWorkout.exercises.append(currentExercise)
-        presentProgress = true
-    }
-    
-    func finishWorkout () {
-        activeWorkout.isComplete = true
-        presentProgress = false
-    }
-    
-    func goToNextExercise () {
-        if(activeWorkout.template.exercises.count == activeWorkout.exercises.count) {
-            finishWorkout()
-            return
+        if let unwrappedWorkout = activeWorkout {
+            if let unwrappedExercise = currentExercise {
+                modelContext.insert(unwrappedWorkout)
+                modelContext.insert(unwrappedExercise)
+                unwrappedWorkout.exercises.append(unwrappedExercise)
+                presentProgress = true
+            }
+        } else {
+            hasStartError  = true;
+            return;
         }
-        let nextExercise = activeWorkout.template.exercises[activeWorkout.exercises.count]
-        currentExercise = ActiveExercise(template: nextExercise)
-        
-        modelContext.insert(currentExercise)
-        activeWorkout.exercises.append(currentExercise)
     }
     
     var body: some View {
@@ -112,7 +101,11 @@ struct TemplateFullView: View {
             }
         }
         .fullScreenCover(isPresented: $presentProgress) {
-            ProgressView(activeWorkout: activeWorkout, currentExercise: currentExercise)
+            if let unwrappedWorkout = activeWorkout {
+                if let unwrappedExercise = currentExercise {
+                    ProgressView(activeWorkout: unwrappedWorkout, currentExercise: unwrappedExercise)
+                }
+            }
         }
         .alert("Error", isPresented: $hasStartError) {
             Button("OK") {}
