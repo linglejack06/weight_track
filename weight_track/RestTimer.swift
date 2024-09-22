@@ -42,5 +42,6 @@ class RestTimer: ObservableObject {
 
     func pause() {
         timer.invalidate()
+        lastDateObserved = Date()
     }
 }

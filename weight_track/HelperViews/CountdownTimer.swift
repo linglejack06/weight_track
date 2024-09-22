@@ -16,9 +16,10 @@ struct CountdownTimer: View {
         return formatter
     }()
     
-    var desiredDuration: Double
+    @Environment(\.scenePhase) var scenePhase
     @StateObject var timer: RestTimer
     var notificationDate: Date = Date()
+    var desiredDuration: Double
     
     init(desiredDuration: Double) {
         self.desiredDuration = desiredDuration
@@ -54,6 +55,14 @@ struct CountdownTimer: View {
         }
         .onAppear() {
             timer.start()
+        }
+        .onChange(of: scenePhase) { oldValue, newValue in
+            if newValue == .background || newValue == .inactive {
+                timer.pause()
+            }
+            if newValue == .active {
+                timer.start();
+            }
         }
     }
 }
