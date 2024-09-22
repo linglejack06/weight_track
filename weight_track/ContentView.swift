@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
@@ -16,6 +17,16 @@ struct ContentView: View {
     func addSamples() {
         let push = WorkoutTemplate(title: "main chest", category: .push)
         modelContext.insert(push)
+    }
+    
+    func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, _ in
+            if success {
+                print("Notification permission granted")
+            } else {
+                print("Notification permission denied")
+            }
+        }
     }
     
     var body: some View {
@@ -28,6 +39,9 @@ struct ContentView: View {
                 .tabItem {
                     Label("History", systemImage: "clock")
                 }
+            }
+            .onAppear {
+                requestNotificationPermission()
             }
         }
     }
