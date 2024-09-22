@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct CountdownTimer: View {
     static var durationFormatter: DateComponentsFormatter = {
@@ -26,6 +27,18 @@ struct CountdownTimer: View {
         self._timer = .init(wrappedValue: RestTimer(duration: desiredDuration))
     }
     
+    func addNotification () {
+        let content = UNMutableNotificationContent()
+        content.title = "Rest Finished"
+        content.subtitle = "Time to get back to work!"
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: desiredDuration, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
+    }
     
     var body: some View {
         VStack {
@@ -55,6 +68,7 @@ struct CountdownTimer: View {
         }
         .onAppear() {
             timer.start()
+            addNotification()
         }
         .onChange(of: scenePhase) { oldValue, newValue in
             if newValue == .background || newValue == .inactive {
