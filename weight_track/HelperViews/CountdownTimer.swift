@@ -71,7 +71,9 @@ struct CountdownTimer: View {
             addNotification()
         }
         .onChange(of: scenePhase) { oldValue, newValue in
-            if newValue == .background || newValue == .inactive {
+            // goes from background -> inactive -> active when opening app after swiping up
+            // oldValue != .background prevents lastDate from getting set very close to the active date (losing the time while in background)
+            if newValue == .background || (newValue == .inactive && oldValue != .background) {
                 timer.pause()
             }
             if newValue == .active {
