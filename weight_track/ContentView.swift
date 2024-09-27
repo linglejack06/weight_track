@@ -12,12 +12,8 @@ import UserNotifications
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var workouts: [WorkoutTemplate]
+    @Query private var activeWorkouts: [ActiveWorkout]
     @State private var isPresented = false
-    
-    func addSamples() {
-        let push = WorkoutTemplate(title: "main chest", category: .push)
-        modelContext.insert(push)
-    }
     
     func requestNotificationPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, _ in

@@ -19,7 +19,7 @@ struct HistoryView: View {
     
     func checkForWorkout () {
         for workout in workouts {
-            if Calendar.current.isDateInToday(workout.date) && !workout.isComplete {
+            if !workout.isComplete {
                 activeWorkout = workout
             }
         }

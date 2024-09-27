@@ -35,7 +35,7 @@ struct HomeView: View {
                         .font(.title2)
                 }
                 ToolbarItem {
-                    Button("Add Workout", action: {isPresented = true})
+                    Button("Add", action: {isPresented = true})
                         .font(.title2)
                 }
             }

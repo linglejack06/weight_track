@@ -59,16 +59,29 @@ struct ProgressView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Close", action: { dismiss() })
+                    Button { dismiss() } label: {
+                        HStack {
+                            Image(systemName: "xmark")
+                                .imageScale(.medium)
+                            Text("Close")
+                        }
+                    }
                 }
                 ToolbarItem(placement: .principal) {
-                    Text(activeWorkout.template.title)
+                    VStack {
+                        Text(activeWorkout.template.title)
+                        Text("Category: \(activeWorkout.template.category)")
+                            .font(.subheadline)
+                            .foregroundStyle(Color.secondary)
+                    }
                 }
                 ToolbarItem {
                     if(activeWorkout.template.exercises.count == activeWorkout.exercises.count) {
                         Button("Finish", action: finishWorkout)
+                            .font(.title2)
                     } else {
                         Button("Move On", action: goToNextExercise)
+                            .font(.title2)
                     }
                 }
             }

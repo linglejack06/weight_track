@@ -38,7 +38,7 @@ struct TemplateFullView: View {
     
     func updatePresentProgress () {
         for workout in activeWorkouts {
-            if Calendar.current.isDateInToday(workout.date) && !workout.isComplete {
+            if !workout.isComplete {
                 // show an eror alert
                 hasStartError = true
                 return
@@ -97,7 +97,8 @@ struct TemplateFullView: View {
                 }
             }
             ToolbarItem {
-                Button("Start Workout", action: updatePresentProgress)
+                Button("Start", action: updatePresentProgress)
+                    .font(.title2)
             }
         }
         .fullScreenCover(isPresented: $presentProgress) {
@@ -110,7 +111,7 @@ struct TemplateFullView: View {
         .alert("Error", isPresented: $hasStartError) {
             Button("OK") {}
         } message: {
-            Text("There is already a workout in progress for today. Delete to start a new one")
+            Text("There is already a workout in progress. Delete or finish to start a new one")
         }
     }
 }
