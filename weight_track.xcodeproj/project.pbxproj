@@ -169,10 +169,8 @@
 				5C6BB8142C4E97DF00C6C414 /* Assets.xcassets */,
 				5C6BB8162C4E97DF00C6C414 /* weight_track.entitlements */,
 				5C6BB8172C4E97DF00C6C414 /* Preview Content */,
-				5C76B4F42C56F00100F147E3 /* Exercise.swift */,
-				5C76B4F62C56F19D00F147E3 /* Workout.swift */,
-				5C1DBE332C5C33F700B28D02 /* HomeView.swift */,
-				5CD485902C9A2D48009D9361 /* RestTimer.swift */,
+				5CCF31862CA71BF600CB911D /* Models */,
+				5CCF31852CA71BE700CB911D /* Helpers */,
 			);
 			path = weight_track;
 			sourceTree = "<group>";
@@ -223,6 +221,23 @@
 			path = HistoryViews;
 			sourceTree = "<group>";
 		};
+		5CCF31852CA71BE700CB911D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5CD485902C9A2D48009D9361 /* RestTimer.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		5CCF31862CA71BF600CB911D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5C76B4F42C56F00100F147E3 /* Exercise.swift */,
+				5C76B4F62C56F19D00F147E3 /* Workout.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		5CEE25232C5804D700302F61 /* TemplateViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +246,7 @@
 				5CEE251F2C5800ED00302F61 /* TemplateListView.swift */,
 				5CEE25242C5804F400302F61 /* TemplateFullView.swift */,
 				5C1CE6F72C5D2FBC0005CE5B /* ExerciseRowView.swift */,
+				5C1DBE332C5C33F700B28D02 /* HomeView.swift */,
 			);
 			path = TemplateViews;
 			sourceTree = "<group>";
