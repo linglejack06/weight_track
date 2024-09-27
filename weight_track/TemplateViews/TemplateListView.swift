@@ -37,16 +37,9 @@ struct TemplateListView: View {
         }
         _workouts = Query(filter: filter)
     }
-    
-    func delete () {
-        for activeWorkout in activeWorkouts {
-            modelContext.delete(activeWorkout)
-        }
-    }
 
     var body: some View {
         if (workouts.count > 0) {
-            Button("Delete active workouts") {delete ()}
             ForEach(workouts) { workout in
                 TemplateCardView(template: workout)
             }
